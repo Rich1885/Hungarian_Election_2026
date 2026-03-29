@@ -1,4 +1,4 @@
-const BASE = "/api";
+const BASE = "https://hungarian-election-2026-api.onrender.com/api";
 
 export async function fetchEvent() {
   const res = await fetch(`${BASE}/event`);
