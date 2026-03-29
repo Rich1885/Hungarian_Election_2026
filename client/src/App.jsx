@@ -17,6 +17,7 @@ import { t, setLanguage, getLanguage } from "./utils/i18n";
 export default function App() {
   const [tab, setTab] = useState("summary");
   const [lang, setLang] = useState(getLanguage());
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Új state a mobil menühöz
   const [event, setEvent] = useState(null);
   const [markets, setMarkets] = useState([]);
   const [polls, setPolls] = useState([]);
@@ -108,8 +109,31 @@ export default function App() {
       <nav className="sticky top-0 z-50 bg-[#0a0a0f]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-14">
-            {/* Tab buttons */}
-            <div className="flex items-center gap-0.5 overflow-x-auto scrollbar-hide">
+            
+            {/* ── Hamburger Menu Button (Only visible on mobile) ── */}
+            <div className="lg:hidden flex items-center">
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 -ml-2 text-slate-400 hover:text-white transition-colors"
+                aria-label="Menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /> // X icon
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /> // Hamburger icon
+                  )}
+                </svg>
+              </button>
+              
+              {/* Aktuális tab címe mobilon a hamburger mellett */}
+              <span className="ml-2 font-medium text-cyan-400 text-sm">
+                {tabs.find(t => t.id === tab)?.label}
+              </span>
+            </div>
+
+            {/* ── Desktop Tab buttons (Hidden on mobile) ── */}
+            <div className="hidden lg:flex items-center gap-0.5 overflow-x-auto scrollbar-hide">
               {tabs.map((tabItem) => (
                 <button
                   key={tabItem.id}
@@ -126,26 +150,26 @@ export default function App() {
             </div>
 
             {/* Right side: update info + lang toggle + refresh */}
-            <div className="flex items-center gap-3 flex-shrink-0 ml-4">
+            <div className="flex items-center gap-3 flex-shrink-0 ml-auto">
               {lastUpdate && (
                 <span className="text-[10px] text-slate-600 hidden lg:inline">
                   {t("app.updated")} {lastUpdate.toLocaleTimeString()}
                 </span>
               )}
 
-              {/* Language toggle with flags */}
+              {/* Language toggle with simple flags (CDN based to fix Windows issue) */}
               <button
                 onClick={handleLangToggle}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-700 transition-all group"
               >
                 <div className="flex flex-col items-center leading-none">
-                  <span className="text-[10px]" title="Magyar">&#127469;&#127482;</span>
-                  <span className={`text-[10px] font-bold ${lang === "hu" ? "text-white" : "text-slate-600"}`}>HU</span>
+                  <img src="https://flagcdn.com/hu.svg" alt="HU" className="w-3.5 h-auto rounded-[1px] mb-0.5 opacity-80 group-hover:opacity-100" />
+                  <span className={`text-[9px] font-bold ${lang === "hu" ? "text-white" : "text-slate-600"}`}>HU</span>
                 </div>
                 <div className="w-px h-5 bg-slate-600" />
                 <div className="flex flex-col items-center leading-none">
-                  <span className="text-[10px]" title="English">&#127468;&#127463;</span>
-                  <span className={`text-[10px] font-bold ${lang === "en" ? "text-white" : "text-slate-600"}`}>EN</span>
+                  <img src="https://flagcdn.com/gb.svg" alt="EN" className="w-3.5 h-auto rounded-[1px] mb-0.5 opacity-80 group-hover:opacity-100" />
+                  <span className={`text-[9px] font-bold ${lang === "en" ? "text-white" : "text-slate-600"}`}>EN</span>
                 </div>
               </button>
 
@@ -159,6 +183,30 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* ── Mobile Dropdown Menu ── */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden border-t border-slate-800/80 bg-[#0a0a0f]/95 backdrop-blur-xl absolute w-full left-0 shadow-xl">
+            <div className="flex flex-col p-2 max-h-[60vh] overflow-y-auto">
+              {tabs.map((tabItem) => (
+                <button
+                  key={tabItem.id}
+                  onClick={() => {
+                    setTab(tabItem.id);
+                    setIsMobileMenuOpen(false); // Close menu on click
+                  }}
+                  className={`px-4 py-3 text-left text-sm font-medium rounded-lg transition-all ${
+                    tab === tabItem.id
+                      ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/30"
+                      : "text-slate-400 hover:text-white hover:bg-slate-800/60 border border-transparent"
+                  }`}
+                >
+                  {tabItem.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
@@ -168,14 +216,8 @@ export default function App() {
           </div>
         )}
 
-        {/* Summary tab */}
-        {tab === "summary" && (
-          <div className="mb-8">
-            <Summary markets={markets} polls={polls} news={news} />
-          </div>
-        )}
-
-        {/* Markets / Polymarket tab */}
+        {tab === "summary" && <div className="mb-8"><Summary markets={markets} polls={polls} news={news} /></div>}
+        
         {tab === "markets" && (
           <>
             {topParties.length >= 2 && (
@@ -185,63 +227,24 @@ export default function App() {
                 ))}
               </div>
             )}
-            {markets.length > 0 && (
-              <div className="mb-8">
-                <OverviewTable markets={markets} />
-              </div>
-            )}
+            {markets.length > 0 && <div className="mb-8"><OverviewTable markets={markets} /></div>}
           </>
         )}
 
-        {/* Polls tab */}
         {tab === "polls" && (
           <>
             <PollSummary polls={polls} />
-            <div className="mb-8">
-              <PollChart polls={polls} />
-            </div>
-            <div className="mb-8">
-              <PollTable polls={polls} />
-            </div>
+            <div className="mb-8"><PollChart polls={polls} /></div>
+            <div className="mb-8"><PollTable polls={polls} /></div>
           </>
         )}
 
-        {/* Parliament tab */}
-        {tab === "parliament" && (
-          <div className="mb-8">
-            <ParliamentChart polls={livePollInput} />
-          </div>
-        )}
+        {tab === "parliament" && <div className="mb-8"><ParliamentChart polls={livePollInput} /></div>}
+        {tab === "map" && <div className="mb-8"><MapPage polls={livePollInput} /></div>}
+        {tab === "withdrawals" && <div className="mb-8"><WithdrawalTracker /></div>}
+        {tab === "youtube" && <div className="mb-8"><YouTubeFeed videos={youtube} /></div>}
+        {tab === "news" && <div className="mb-8"><NewsFeed articles={news} /></div>}
 
-        {/* Map tab */}
-        {tab === "map" && (
-          <div className="mb-8">
-            <MapPage polls={livePollInput} />
-          </div>
-        )}
-
-        {/* Withdrawals tab */}
-        {tab === "withdrawals" && (
-          <div className="mb-8">
-            <WithdrawalTracker />
-          </div>
-        )}
-
-        {/* YouTube tab */}
-        {tab === "youtube" && (
-          <div className="mb-8">
-            <YouTubeFeed videos={youtube} />
-          </div>
-        )}
-
-        {/* News tab */}
-        {tab === "news" && (
-          <div className="mb-8">
-            <NewsFeed articles={news} />
-          </div>
-        )}
-
-        {/* Footer */}
         <footer className="text-center py-8 border-t border-slate-800">
           <p className="text-xs text-slate-600">{t("footer.data")}</p>
           <p className="text-xs text-slate-700 mt-1">{t("footer.title")}</p>
