@@ -1,11 +1,11 @@
+import PartyLogo from "./PartyLogo";
+import { t, timeAgoI18n } from "../utils/i18n";
+
 function fmtMoney(v) {
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(2)}M`;
   if (v >= 1_000) return `$${(v / 1_000).toFixed(1)}K`;
   return `$${v.toFixed(0)}`;
 }
-
-import PartyLogo from "./PartyLogo";
-import { t, timeAgoI18n } from "../utils/i18n";
 
 const SOURCE_COLORS = {
   Telex: "text-emerald-400",
@@ -65,10 +65,12 @@ export default function Summary({ markets, polls, news }) {
           <div className="text-center">
             <PartyLogo party="Fidesz" size={48} className="mx-auto mb-2" />
             <div className="text-sm font-semibold text-orange-400 mb-2">Fidesz-KDNP</div>
-            <div className="text-4xl font-black text-orange-400 tabular-nums">{fideszProb.toFixed(1)}%</div>
-            <div className="text-[10px] text-slate-500 mt-1">{t("summary.marketProb")}</div>
-            <div className="text-xl font-bold text-orange-400/70 mt-2 tabular-nums">{avgFidesz.toFixed(1)}%</div>
-            <div className="text-[10px] text-slate-500">{t("summary.pollAvg")}</div>
+            {/* Közvélemény lett a NAGY */}
+            <div className="text-4xl font-black text-orange-400 tabular-nums">{avgFidesz.toFixed(1)}%</div>
+            <div className="text-[10px] text-slate-500 mt-1">{t("summary.pollAvg")}</div>
+            {/* Piac lett a kicsi */}
+            <div className="text-xl font-bold text-orange-400/70 mt-2 tabular-nums">{fideszProb.toFixed(1)}%</div>
+            <div className="text-[10px] text-slate-500">{t("summary.marketProb")}</div>
           </div>
 
           {/* Center — VS + indicator */}
@@ -91,27 +93,29 @@ export default function Summary({ markets, polls, news }) {
           <div className="text-center">
             <PartyLogo party="Tisza" size={48} className="mx-auto mb-2" />
             <div className="text-sm font-semibold text-emerald-400 mb-2">TISZA</div>
-            <div className="text-4xl font-black text-emerald-400 tabular-nums">{tiszaProb.toFixed(1)}%</div>
-            <div className="text-[10px] text-slate-500 mt-1">{t("summary.marketProb")}</div>
-            <div className="text-xl font-bold text-emerald-400/70 mt-2 tabular-nums">{avgTisza.toFixed(1)}%</div>
-            <div className="text-[10px] text-slate-500">{t("summary.pollAvg")}</div>
+            {/* Közvélemény lett a NAGY */}
+            <div className="text-4xl font-black text-emerald-400 tabular-nums">{avgTisza.toFixed(1)}%</div>
+            <div className="text-[10px] text-slate-500 mt-1">{t("summary.pollAvg")}</div>
+            {/* Piac lett a kicsi */}
+            <div className="text-xl font-bold text-emerald-400/70 mt-2 tabular-nums">{tiszaProb.toFixed(1)}%</div>
+            <div className="text-[10px] text-slate-500">{t("summary.marketProb")}</div>
           </div>
         </div>
 
         {/* Comparison bar */}
         <div className="mt-4">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] text-slate-500 w-16">{t("summary.markets")}</span>
-            <div className="flex-1 h-3 bg-slate-800 rounded-full overflow-hidden flex">
-              <div className="h-full bg-orange-500/60 rounded-l-full" style={{ width: `${fideszProb}%` }} />
-              <div className="h-full bg-emerald-500/60 rounded-r-full" style={{ width: `${tiszaProb}%` }} />
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
             <span className="text-[10px] text-slate-500 w-16">{t("summary.polls")}</span>
             <div className="flex-1 h-3 bg-slate-800 rounded-full overflow-hidden flex">
               <div className="h-full bg-orange-500/60 rounded-l-full" style={{ width: `${avgFidesz}%` }} />
               <div className="h-full bg-emerald-500/60 rounded-r-full" style={{ width: `${avgTisza}%` }} />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-slate-500 w-16">{t("summary.markets")}</span>
+            <div className="flex-1 h-3 bg-slate-800 rounded-full overflow-hidden flex">
+              <div className="h-full bg-orange-500/60 rounded-l-full" style={{ width: `${fideszProb}%` }} />
+              <div className="h-full bg-emerald-500/60 rounded-r-full" style={{ width: `${tiszaProb}%` }} />
             </div>
           </div>
         </div>
@@ -120,18 +124,18 @@ export default function Summary({ markets, polls, news }) {
       {/* Metrics grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="card p-4 text-center">
-          <div className="text-[10px] uppercase tracking-widest text-slate-500 mb-2">{t("summary.marketDiff")}</div>
-          <div className={`text-2xl font-black tabular-nums ${tiszaProb > fideszProb ? "text-emerald-400" : "text-orange-400"}`}>
-            {Math.abs(tiszaProb - fideszProb).toFixed(1)}pp
-          </div>
-          <div className="text-[10px] text-slate-600 mt-1">{marketLeader} {t("summary.leads")}</div>
-        </div>
-        <div className="card p-4 text-center">
           <div className="text-[10px] uppercase tracking-widest text-slate-500 mb-2">{t("summary.pollDiff")}</div>
           <div className={`text-2xl font-black tabular-nums ${avgTisza > avgFidesz ? "text-emerald-400" : "text-orange-400"}`}>
             {Math.abs(avgTisza - avgFidesz).toFixed(1)}pp
           </div>
           <div className="text-[10px] text-slate-600 mt-1">{pollLeader} {t("summary.leads")}</div>
+        </div>
+        <div className="card p-4 text-center">
+          <div className="text-[10px] uppercase tracking-widest text-slate-500 mb-2">{t("summary.marketDiff")}</div>
+          <div className={`text-2xl font-black tabular-nums ${tiszaProb > fideszProb ? "text-emerald-400" : "text-orange-400"}`}>
+            {Math.abs(tiszaProb - fideszProb).toFixed(1)}pp
+          </div>
+          <div className="text-[10px] text-slate-600 mt-1">{marketLeader} {t("summary.leads")}</div>
         </div>
         <div className="card p-4 text-center">
           <div className="text-[10px] uppercase tracking-widest text-slate-500 mb-2">{t("summary.vol24h")}</div>
