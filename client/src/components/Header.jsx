@@ -22,10 +22,14 @@ export default function Header() {
 
       <div className="relative max-w-7xl mx-auto px-6 py-8">
         <div className="flex items-center justify-between">
-          {/* Left — title */}
+                    {/* Left — title */}
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <span className="text-2xl">&#127469;&#127482;</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" className="w-8 h-6 rounded-sm shadow-sm overflow-hidden border border-slate-700">
+                <path fill="#ce2939" d="M0 0h640v160H0z"/>
+                <path fill="#fff" d="M0 160h640v160H0z"/>
+                <path fill="#477050" d="M0 320h640v160H0z"/>
+              </svg>
               <h1 className="text-2xl font-bold text-white tracking-tight">
                 {t("app.title")}
               </h1>
