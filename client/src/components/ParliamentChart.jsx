@@ -188,20 +188,28 @@ export default function ParliamentChart({ polls: livePollData }) {
       </div>
 
       {/* ── Edukációs Szekció ── */}
-      <div className="bg-slate-900/50 rounded-xl border border-slate-800">
+      <div className="bg-slate-800/80 rounded-xl border-b-2 border-r border-slate-700 shadow-sm shadow-black/40 overflow-hidden transition-all duration-300">
         <button
           onClick={() => setShowEducation(!showEducation)}
-          className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-800/30 transition-colors rounded-xl"
+          className="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-800 hover:bg-slate-700 active:bg-slate-700/80 transition-colors"
         >
-          <div>
-            <h3 className="text-sm font-bold text-white">{t("edu.title")}</h3>
-            <p className="text-[10px] text-slate-500">{t("edu.subtitle")}</p>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-white tracking-wide">{t("edu.title")}</h3>
+              <p className="text-[10px] sm:text-xs text-cyan-400/80 font-medium mt-0.5">{t("edu.subtitle")}</p>
+            </div>
           </div>
-          <span className={`text-slate-400 transition-transform duration-300 ${showEducation ? "rotate-180" : ""}`}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          
+          <div className={`flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 border border-slate-700 text-slate-300 transition-all duration-300 ${showEducation ? "rotate-180 bg-cyan-900 border-cyan-700 text-cyan-400" : ""}`}>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
             </svg>
-          </span>
+          </div>
         </button>
 
         {showEducation && (
@@ -462,8 +470,7 @@ export default function ParliamentChart({ polls: livePollData }) {
                     setUseCustom(true);
                     setCustomPolls(s.polls);
                   }}
-                  className="px-2 py-1.5 text-[10px] font-medium text-slate-400 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors"
-                >
+className="px-2 py-1.5 text-[10px] font-semibold text-white bg-blue-600/90 shadow-sm shadow-black/40 rounded-lg border-b-2 border-r border-blue-800 hover:bg-blue-500 hover:text-white active:translate-y-[1px] active:border-b-0 transition-all"                >
                   {s.label}
                 </button>
               ))}

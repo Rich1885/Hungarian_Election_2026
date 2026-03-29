@@ -94,7 +94,7 @@ export default function MapPage({ polls: livePollData }) {
           a valóságban az egyéni jelöltek, helyi ügyek és kampány is számítanak.
           A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz —
           <span className="text-amber-400/80 font-medium">de ezek mind feltételezések, egyik sem jóslat.
-          A végső szót a szavazók mondják ki április 12-én.</span>
+            A végső szót a szavazók mondják ki április 12-én.</span>
         </p>
       </div>
 
@@ -107,7 +107,7 @@ export default function MapPage({ polls: livePollData }) {
             {useCustom && (
               <button
                 onClick={resetToDefault}
-                className="px-2 py-1 text-[10px] text-cyan-400 bg-cyan-500/10 rounded border border-cyan-500/20 hover:bg-cyan-500/20 transition-colors"
+                className="px-2 py-1 text-[10px] font-semibold text-white bg-cyan-600/90 rounded-lg border-b-2 border-r border-cyan-800 shadow-sm hover:bg-cyan-500 active:translate-y-[1px] active:border-b-0 transition-all"
               >
                 Élő adatok
               </button>
@@ -142,7 +142,7 @@ export default function MapPage({ polls: livePollData }) {
 
           {/* Gyors forgatókönyvek */}
           <div className="mt-4 pt-3 border-t border-slate-700">
-            <p className="text-[10px] text-slate-500 mb-2">Gyors forgatókönyvek:</p>
+            <p className="text-[10px] text-slate-500 mb-2">Gyors forgatókönyvek kipróbálása:</p>
             <div className="grid grid-cols-2 gap-2">
               {SCENARIOS.map((s) => (
                 <button
@@ -151,7 +151,7 @@ export default function MapPage({ polls: livePollData }) {
                     setUseCustom(true);
                     setCustomPolls(s.polls);
                   }}
-                  className="px-2 py-1.5 text-[10px] font-medium text-slate-400 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 hover:text-white transition-colors"
+                  className="px-2 py-1.5 text-[10px] font-semibold text-white bg-blue-600/90 shadow-sm shadow-black/40 rounded-lg border-b-2 border-r border-blue-800 hover:bg-blue-500 hover:text-white active:translate-y-[1px] active:border-b-0 transition-all"
                 >
                   {s.label}
                 </button>
