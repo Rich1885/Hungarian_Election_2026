@@ -1,0 +1,279 @@
+{
+  "lastUpdated": "2026-03-28",
+  "nationalWithdrawals": [
+    {
+      "party": "Momentum",
+      "type": "list_withdrawal",
+      "date": "2025-06-07",
+      "beneficiary": "Tisza",
+      "description_hu": "A Momentum kuldottgyulesen dontott: nem indit onallo listat a 2026-os valasztason. Teljes visszalepes, nem csak korzetekben. A TISZA gyozelme erdekeben hozott dontes.",
+      "description_en": "Momentum decided at its delegates' meeting not to run in the 2026 election at all. Full withdrawal, not just in districts. Decision made in the interest of a TISZA victory.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2025/06/07/momentum-kuldottgyules-valasztas-2026"
+    },
+    {
+      "party": "MSZP-Parbeszed",
+      "partyFull": "MSZP",
+      "type": "list_withdrawal",
+      "date": "2026-01-15",
+      "beneficiary": "Tisza",
+      "description_hu": "Az MSZP kongresszusa ugy dontott, hogy a part nem indul a 2026-os valasztason. Nem allit orszagos listat es nem indit sajat jelolteket partszinekben. Minden korzetben a legerosebb ellenzeki jeloltet tamogatjak. Kivetel: 4 volt MSZP-s politikus fuggetlenkent indul (Kunhalmi Agnes, Vajda Zoltan, Hiller Istvan, Szabo Sandor).",
+      "description_en": "The MSZP congress decided not to run in the 2026 election. No national list, no candidates under party banner. They support the strongest opposition candidate in every district. Exception: 4 former MSZP politicians run as independents (Kunhalmi Agnes, Vajda Zoltan, Hiller Istvan, Szabo Sandor).",
+      "source_name": "Nepszava",
+      "source_url": "https://nepszava.hu/3282808_momentum-mozgalom-2026-parlamenti-valasztas-nem-indul"
+    },
+    {
+      "party": "MMN",
+      "partyFull": "Mindenki Magyarorszaga Neppart",
+      "type": "list_withdrawal",
+      "date": "2025-06-01",
+      "beneficiary": "Tisza",
+      "description_hu": "Marki-Zay Peter bejelentette, hogy partja, a Mindenki Magyarorszaga Neppart nem indit onallo listat 2026-ban. A dontes politikai gesztus a Tisza Part javara.",
+      "description_en": "Marki-Zay Peter announced that his party, MMN, will not run an independent list in 2026. The decision is a political gesture in favour of the Tisza Party.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2025/06/01/nem-indul-onalloan-a-2026-os-valasztason-marki-zay-peter-partja-mindenki-magyarorszaga-neppart-tisza-part-magyar-peter"
+    }
+  ],
+  "districtWithdrawals": [
+    {
+      "oevk_id": "BP-06",
+      "oevk_name_hu": "Budapest 06 (Jozsefvaros-Ferencvaros)",
+      "oevk_name_en": "Budapest 06 (Jozsefvaros-Ferencvaros)",
+      "candidate": "Jambor Andras",
+      "party": "Parbeszed",
+      "date": "2025-06-19",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": "Velkey Gyorgy / Hadhazy Akos",
+      "reason_hu": "Valasztoi a kormanyvaltasert szavaztak ra, es ezt a dontesevel tudja a legjobban szolgalni.",
+      "reason_en": "His voters voted for government change, and he can best serve that goal with this decision.",
+      "source_name": "HVG",
+      "source_url": "https://hvg.hu/itthon/20250619_Jambor-Andras-megsem-indul-a-2026-os-valasztasokon"
+    },
+    {
+      "oevk_id": "BP-06",
+      "oevk_name_hu": "Budapest 06 (Jozsefvaros-Ferencvaros)",
+      "oevk_name_en": "Budapest 06 (Jozsefvaros-Ferencvaros)",
+      "candidate": "Komaromi Zoltan",
+      "party": "DK",
+      "date": "2026-03-25",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": "Velkey Gyorgy / Hadhazy Akos",
+      "reason_hu": "Dobrev Klara leptette vissza a kielezett verseny miatt a kormanyvaltasi eselyek maximalizalasa erdekeben.",
+      "reason_en": "Dobrev Klara withdrew him due to the tight race, to maximise government change chances.",
+      "source_name": "HVG",
+      "source_url": "https://hvg.hu/itthon/20260325_donbrev-dk-visszalepesek-valasztasok-2026"
+    },
+    {
+      "oevk_id": "NO-01",
+      "oevk_name_hu": "Nograd 01 (Salgotarjan)",
+      "oevk_name_en": "Nograd 01 (Salgotarjan)",
+      "candidate": "DK jelolt",
+      "party": "DK",
+      "date": "2026-03-25",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "A TISZA jelolt a legerosebb kihivo, a DK partdontessel leptette vissza jeloltjet.",
+      "reason_en": "The TISZA candidate is the strongest challenger; DK withdrew their candidate by party decision.",
+      "source_name": "HVG",
+      "source_url": "https://hvg.hu/itthon/20260325_donbrev-dk-visszalepesek-valasztasok-2026"
+    },
+    {
+      "oevk_id": "BP-09",
+      "oevk_name_hu": "Budapest 09 (Csepel-Soroksar)",
+      "oevk_name_en": "Budapest 09 (Csepel-Soroksar)",
+      "candidate": "Szabo Szabolcs",
+      "party": "Fuggetlen",
+      "date": "2026-02-23",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Az igazi kihivoja a Fidesznek a Tisza, es nem erdemes vele szembe menni.",
+      "reason_en": "The real challenger to Fidesz is Tisza, and it's not worth running against them.",
+      "source_name": "Index",
+      "source_url": "https://index.hu/belfold/csatater/2026/02/23/szabo-szabolcs-momentum-csepel-soroksar-budapest-orszaggyulesi-valasztasok-2026-kepviselojelolt-visszalepes/"
+    },
+    {
+      "oevk_id": "BK-01",
+      "oevk_name_hu": "Bacs-Kiskun 01 (Kecskemet)",
+      "oevk_name_en": "Bacs-Kiskun 01 (Kecskemet)",
+      "candidate": "Kopping Rita",
+      "party": "DK",
+      "date": "2026-03-20",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Sajat dontesbol lepett vissza a kormanyvaltasert. Kovetkezmenye: kizartak a DK-bol.",
+      "reason_en": "Stepped down by own decision for government change. Consequence: expelled from DK.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/03/20/visszalep-dk-kepviselojelolt-kopping-rita-bacs-kiskun-01"
+    },
+    {
+      "oevk_id": "BA-01",
+      "oevk_name_hu": "Baranya 01 (Pecs)",
+      "oevk_name_en": "Baranya 01 (Pecs)",
+      "candidate": "Mellar Tamas",
+      "party": "Parbeszed",
+      "date": "2025-08-22",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "A kozgazdaszprofesszor kifejezetten a Tisza Part javara lepett vissza, mondvan a szavazatok megosztasa a kormanynak kedvezne.",
+      "reason_en": "The economics professor explicitly stepped down in favour of Tisza, saying vote splitting would benefit the government.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2025/08/22/mellar-tamas-fuggetlen-kepviselo-nem-indul-2026-ban-tisza-part-eselye"
+    },
+    {
+      "oevk_id": "BP-08",
+      "oevk_name_hu": "Budapest 08 (Kispest)",
+      "oevk_name_en": "Budapest 08 (Kispest)",
+      "candidate": "Ternyak Andras",
+      "party": "DK",
+      "date": "2026-03-24",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Az eselyek maximalizalasa miatt lepett vissza a Tisza javara.",
+      "reason_en": "Stepped down to maximise chances for Tisza.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/03/24/ternyak-andras-dk-budapest-8-xix-kerulet-visszalepes"
+    }
+  ],
+  "notableNonWithdrawals": [
+    {
+      "oevk_id": "BP-13",
+      "oevk_name_hu": "Budapest (Angyalfold)",
+      "oevk_name_en": "Budapest (Angyalfold)",
+      "candidate": "Varju Laszlo",
+      "party": "DK",
+      "reason_hu": "A DK szerint ebben a korzetben ok az erosebbek, nem a TISZA. Inkabb a TISZA-t kerik visszalepesre.",
+      "reason_en": "DK believes they are stronger in this district, not TISZA. They ask TISZA to step down instead.",
+      "source_name": "Index",
+      "source_url": "https://index.hu/belfold/2026/02/26/konkretan-ronai-egon-varju-laszlo-demokratikus-koalicio-podcast-valasztas-2026/"
+    },
+    {
+      "oevk_id": "BAZ-01",
+      "oevk_name_hu": "Borsod-Abauj-Zemplen (Miskolc)",
+      "oevk_name_en": "Borsod-Abauj-Zemplen (Miskolc)",
+      "candidate": "Jakab Peter",
+      "party": "DK",
+      "reason_hu": "Jakab Peter DK-s szinekben indul, a DK szerint o a legerosebb kihivo ebben a korzetben.",
+      "reason_en": "Jakab Peter runs under DK banner; DK considers him the strongest challenger in this district.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/01/26/jakab-peter-dk-jeloltje-valasztas-aprilis-12-miskolc-borsod-abauj-zemplen-megye-1-szamu-oevk"
+    },
+    {
+      "oevk_id": "BP-06",
+      "oevk_name_hu": "Budapest 06 (Hadhazy-faktor)",
+      "oevk_name_en": "Budapest 06 (Hadhazy factor)",
+      "candidate": "Hadhazy Akos",
+      "party": "Fuggetlen",
+      "reason_hu": "Hadhazy Akos fuggetlen jeloltkent versenyben van a TISZA jeloltjevel is — itt nem egyertelmu, ki az erosebb ellenzeki.",
+      "reason_en": "Hadhazy Akos competes as independent even with the TISZA candidate — it's unclear who is the stronger opposition figure here.",
+      "source_name": "Index",
+      "source_url": "https://index.hu/belfold/2026/02/02/valasztas-2026-csatater-kampany-korzetek-billego-hadhazy-akos-velkey-gyorgy-radics-bela-tisza-part-fidesz/"
+    }
+  ],
+  "partyStrategies": [
+    {
+      "party": "DK",
+      "status": "partial",
+      "color": "#1d4ed8",
+      "summary_hu": "Reszleges taktikai visszalepesek. Partdontessel 3 korzetbol leptek vissza (BP-06, BP-08, Nograd-01). Kopping Rita sajat dontese miatt kizartak. Tobb korzetben maradnak, ahol szerintuk ok az erosebbek.",
+      "summary_en": "Partial tactical withdrawals. Withdrew from 3 districts by party decision (BP-06, BP-08, Nograd-01). Kopping Rita expelled for independent withdrawal. Stay in several districts where they believe they are stronger.",
+      "source_name": "Index",
+      "source_url": "https://index.hu/belfold/csatater/2026/03/25/dobrev-klara-demokratikus-koalicio-visszalepes-budapest-nograd-valasztokorzet-valasztas-2026/"
+    },
+    {
+      "party": "Momentum",
+      "status": "full_withdrawal",
+      "color": "#7c3aed",
+      "summary_hu": "Teljes kiszallas. Nem indul a 2026-os valasztason sem listaval, sem egyeni jeloltekkel. A TISZA gyozelme erdekeben hozott dontes.",
+      "summary_en": "Full withdrawal. Not running in 2026 with either a list or individual candidates. Decision made for TISZA's victory.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2025/06/07/momentum-kuldottgyules-valasztas-2026"
+    },
+    {
+      "party": "MSZP-Parbeszed",
+      "status": "full_withdrawal",
+      "color": "#dc2626",
+      "summary_hu": "Nem indul partszinekben. Kongresszusi dontes: nincs orszagos lista, nincs sajat jelolt. Minden korzetben a legerosebb ellenzeki jeloltet tamogatjak. Kivetel: 4 volt MSZP-s fuggetlenkent indul.",
+      "summary_en": "Not running under party banner. Congress decision: no national list, no own candidates. Support strongest opposition candidate in every district. Exception: 4 former MSZP members run as independents.",
+      "source_name": "444.hu",
+      "source_url": "https://444.hu/2026/02/20/dontott-a-kongresszus-az-mszp-nem-indul-a-valasztason"
+    },
+    {
+      "party": "Mi Hazank",
+      "status": "running_everywhere",
+      "color": "#166534",
+      "summary_hu": "Mindenhol indul. Nem varhato koordinacio vagy visszalepes. Sajat erovel kuzd minden korzetben.",
+      "summary_en": "Running everywhere. No coordination or withdrawal expected. Fighting in every district with their own strength.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2025/08/20/mi-hazank-mozgalom-orszaggyulesi-valasztas-2026-jeloltek"
+    },
+    {
+      "party": "MKKP",
+      "status": "running",
+      "color": "#6b7280",
+      "summary_hu": "Indul, nem lep vissza. Sajat protest-szerep, nem akar koordinaciot. Helyenkent spoilerhatas lehetseges.",
+      "summary_en": "Running, not withdrawing. Own protest role, no coordination. Possible spoiler effect in some districts.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/01/27/mkkp-nagy-david-valasztas-indulas-jeloltek-lista"
+    },
+    {
+      "party": "Jobbik",
+      "status": "marginal",
+      "color": "#6b7280",
+      "summary_hu": "Nem tudott orszagos listat allitani, 48 egyeni jelolttel indul. Huszonot ev utan eloszor nem lesz a szavazolapon a Jobbik logoja.",
+      "summary_en": "Failed to field a national list, running with 48 individual candidates. For the first time in 20 years, the Jobbik logo will not appear on the ballot.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/03/06/jobbik-orszagos-lista-ajanlasgyujtes"
+    }
+  ],
+  "mszpIndependents": [
+    {
+      "oevk_id": "BP-08",
+      "oevk_name_hu": "Budapest 08",
+      "oevk_name_en": "Budapest 08",
+      "candidate": "Kunhalmi Agnes",
+      "note_hu": "Volt MSZP tarselnok, fuggetlenkent indul",
+      "note_en": "Former MSZP co-chair, running as independent",
+      "source_name": "HVG",
+      "source_url": "https://hvg.hu/itthon/20260216_kunhalmi-agnes-mszp-egyeni-jelolt-kampany-orszaggyulesi-valasztas-2026-szinszlo-sandor-gajda-peter-partlogo"
+    },
+    {
+      "oevk_id": "BP-14",
+      "oevk_name_hu": "Budapest 14",
+      "oevk_name_en": "Budapest 14",
+      "candidate": "Vajda Zoltan",
+      "note_hu": "MSZP-hez kotheto, fuggetlenkent indul",
+      "note_en": "MSZP-linked, running as independent",
+      "source_name": "Nepszava",
+      "source_url": "https://nepszava.hu/3312699_mszp-valasztas-2026-indulas-visszalepes"
+    },
+    {
+      "oevk_id": "BP-16",
+      "oevk_name_hu": "Budapest 16",
+      "oevk_name_en": "Budapest 16",
+      "candidate": "Hiller Istvan",
+      "note_hu": "Volt MSZP elnok, fuggetlenkent indul",
+      "note_en": "Former MSZP chairman, running as independent",
+      "source_name": "444.hu",
+      "source_url": "https://444.hu/2026/01/27/hiller-istvan-bejelentette-a-kozmediaban-hogy-ujraindul-a-korzeteben"
+    },
+    {
+      "oevk_id": "CS-01",
+      "oevk_name_hu": "Csongrad-Csanad 01 (Szeged)",
+      "oevk_name_en": "Csongrad-Csanad 01 (Szeged)",
+      "candidate": "Szabo Sandor",
+      "note_hu": "MSZP-hez kotheto, fuggetlenkent indul, helyi beagyazottsag",
+      "note_en": "MSZP-linked, running as independent, strong local presence",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/03/06/valasztas-2026-ujraindulo-eros-erdekes-vagy-ismert-jeloltek-jeloltallitas"
+    }
+  ],
+  "oevkEstimate": {
+    "tiszaLeaning": "54-62",
+    "battleground": "20-24",
+    "fideszLeaning": "24-30",
+    "note_hu": "Nyilvanos modellek tobbsege TISZA-tobbseget vetit elore. Fo toresvonal: Budapest es nagyvarosok inkabb TISZA, falvak es keleti/deli korzetekben inkabb Fidesz. Az atrajzolt korzetok a Fidesz tulelesi eselyeit javitjak.",
+    "note_en": "Most public models project a TISZA majority. Main divide: Budapest and large cities lean TISZA, villages and eastern/southern districts lean Fidesz. Redistricted constituencies improve Fidesz survival chances.",
+    "source_name": "Index",
+    "source_url": "https://index.hu/belfold/csatater/2026/03/11/valasztas-2026-mandatum-becsles-budapest-jozsefvaros-zuglo-soroksar-angyalfold-kispest-kobanya-terezvaros/"
+  }
+}
