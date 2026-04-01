@@ -1,27 +1,33 @@
 <!doctype html>
-<html lang="en">
+<!-- Itt beállítjuk, hogy az oldal magyar nyelvű -->
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇭🇺</text></svg>">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Választási Hírközpont</title>
+    <meta name="description" content="Magyarország 2026: Élő választási dashboard. Közvélemény-kutatások átlaga, valós idejű mandátumbecslés, és Polymarket esélyek egyetlen interaktív felületen." />
+    <!-- Kulcsszavak a keresőmotoroknak -->
+    <meta name="keywords" content="2026 választás, Tisza Párt, Fidesz, Polymarket, mandátumbecslés, közvélemény-kutatás, választási térkép" />
+    <meta name="author" content="Választás 2026" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇭🇺</text></svg>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0f" />
-  <meta name="apple-mobile-web-app-title" content="Választás 2026">
-  <title>Választási Hírközpont</title>
-      <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-065CCNXP2W"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="2026-os Választási Esélyek | Élő Dashboard" />
+    <meta property="og:description" content="Nézd meg a legfrissebb mandátumbecslést és a Polymarket piacokat valós időben!" />
+   
+    <meta property="og:url" content="https://hungarian-election-2026.vercel.app/" />
+    <meta property="og:image" content="https://hungarian-election-2026.vercel.app/og-image.jpg" />
+    <meta property="og:site_name" content="Választás 2026 Dashboard" />
 
-      gtag('config', 'G-065CCNXP2W');
-    </script>
-</head>
-
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
-
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="2026-os Választási Esélyek | Élő Dashboard" />
+    <meta name="twitter:description" content="Közvélemény-kutatások átlaga és élő Polymarket esélyek." />
+    <meta name="twitter:image" content="https://hungarian-election-2026.vercel.app/og-image.jpg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
