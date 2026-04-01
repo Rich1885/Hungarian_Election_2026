@@ -176,16 +176,18 @@ export default function ParliamentChart({ polls: livePollData }) {
     <div className="space-y-6" data-export="parliament">
       {/* Módszertani magyarázat */}
       <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
-        <h3 className="text-sm font-bold text-amber-400 mb-2">{t("parliament.warning.title")}</h3>
-        <p className="text-xs text-slate-400 leading-relaxed">{t("parliament.warning.body")}</p>
-        <button
-          onClick={() => setShowEducation(!showEducation)}
-          className="mt-3 flex items-center gap-1.5 text-[11px] text-amber-400/70 hover:text-amber-400 transition-colors"
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          {t("parliament.edu.hint")}
-        </button>
-      </div>
+        <h3 className="text-sm font-bold text-amber-400 mb-2">⚠ Fontos: Ez egy becslés, nem jóslat!</h3>
+        <p className="text-xs text-slate-400 leading-relaxed">
+          A modell a <span className="text-white font-medium">2022-es és 2024-es EP tényleges választási eredményeket</span> kombinálja
+          az <span className="text-white font-medium">összes elérhető közvélemény-kutatás átlagával</span>, és ebből becsüli meg,
+          hogy az egyes körzetekben melyik párt nyerne (<span className="text-slate-300">Uniform National Swing modell</span>).
+          Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság —
+          a valóságban az egyéni jelöltek, helyi ügyek és kampány is számítanak.
+          A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz —
+          <span className="text-amber-400/80 font-medium"> de ezek mind feltételezések, egyik sem jóslat.
+          A végső szót a szavazók mondják ki április 12-én.</span>
+        </p>
+        </div>
 
       {/* ── Edukációs Szekció ── */}
       <div className="bg-slate-800/80 rounded-xl border-b-2 border-r border-slate-700 shadow-sm shadow-black/40 overflow-hidden transition-all duration-300">
