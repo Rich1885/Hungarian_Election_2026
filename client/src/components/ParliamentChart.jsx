@@ -459,10 +459,10 @@ export default function ParliamentChart({ polls: livePollData }) {
             <p className="text-[10px] text-slate-500 mb-2">{t("parliament.scenarios")}</p>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: t("parliament.sc.current"), polls: { Fidesz: 40, Tisza: 45, "Mi Hazánk": 6, DK: 4, Momentum: 2, "MSZP-Párbeszéd": 2, LMP: 1 } },
-                { label: t("parliament.sc.close"), polls: { Fidesz: 44, Tisza: 44, "Mi Hazánk": 6, DK: 3, Momentum: 1, "MSZP-Párbeszéd": 1, LMP: 1 } },
-                { label: t("parliament.sc.fidesz23"), polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 5, Momentum: 1, "MSZP-Párbeszéd": 1, LMP: 1 } },
-                { label: t("parliament.sc.tisza23"), polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 5, Momentum: 2, "MSZP-Párbeszéd": 1, LMP: 1 } },
+                { label: t("parliament.sc.current"), polls: { Fidesz: 39, Tisza: 44, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.close"), polls: { Fidesz: 43, Tisza: 43, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.fidesz23"), polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.tisza23"), polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
               ].map((s) => (
                 <button
                   key={s.label}

@@ -34,10 +34,10 @@ function PartySlider({ party, value, color, onChange }) {
 }
 
 const SCENARIOS = [
-  { label: "Jelenlegi", polls: { Fidesz: 40, Tisza: 45, "Mi Hazánk": 6, DK: 4, Momentum: 2, "MSZP-Párbeszéd": 2, LMP: 1 } },
-  { label: "Szoros", polls: { Fidesz: 44, Tisza: 44, "Mi Hazánk": 6, DK: 3, Momentum: 1, "MSZP-Párbeszéd": 1, LMP: 1 } },
-  { label: "Fidesz 2/3", polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 5, Momentum: 1, "MSZP-Párbeszéd": 1, LMP: 1 } },
-  { label: "TISZA 2/3", polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 5, Momentum: 2, "MSZP-Párbeszéd": 1, LMP: 1 } },
+  { label: "Jelenlegi", polls: { Fidesz: 39, Tisza: 44, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "Szoros", polls: { Fidesz: 43, Tisza: 43, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "Fidesz 2/3", polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "TISZA 2/3", polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
 ];
 
 export default function MapPage({ polls: livePollData }) {
@@ -83,12 +83,12 @@ export default function MapPage({ polls: livePollData }) {
 
   return (
     <div className="space-y-6">
-      {/* Módszertani magyarázat */}
+            {/* Módszertani magyarázat */}
       <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
         <h3 className="text-sm font-bold text-amber-400 mb-2">⚠ Fontos: Ez egy becslés, nem jóslat!</h3>
         <p className="text-xs text-slate-400 leading-relaxed">
-          A térkép a <span className="text-white font-medium">2022-es tényleges választási eredményeket</span> kombinálja
-          az <span className="text-white font-medium">utolsó 5 közvélemény-kutatás átlagával</span>, és ebből becsüli meg,
+          A térkép a <span className="text-white font-medium">2022-es és 2024-es EP tényleges választási eredményeket</span> kombinálja
+          az <span className="text-white font-medium">összes elérhető közvélemény-kutatás átlagával</span>, és ebből becsüli meg,
           hogy az egyes körzetekben melyik párt nyerne (<span className="text-slate-300">Uniform National Swing modell</span>).
           Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság —
           a valóságban az egyéni jelöltek, helyi ügyek és kampány is számítanak.

@@ -77,9 +77,9 @@ export default function App() {
       Tisza: Math.round(avg("tisza") * 10) / 10,
       "Mi Hazánk": Math.round(avg("miHazank") * 10) / 10,
       DK: Math.round(avg("dk") * 10) / 10,
-      Momentum: 2,
-      "MSZP-Párbeszéd": 2,
-      LMP: 1,
+      Momentum: Math.round(avg("momentum") * 10) / 10 || 0,
+      "MSZP-Párbeszéd": Math.round(avg("mszp") * 10) / 10 || 0,
+      LMP: Math.round(avg("lmp") * 10) / 10 || 0,
     };
     return result.Fidesz > 0 && result.Tisza > 0 ? result : null;
   })();
