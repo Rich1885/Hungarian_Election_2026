@@ -11,7 +11,7 @@ import { t } from "../utils/i18n";
 /* ── Csúszka (ugyanaz mint a ParliamentChart-ban) ── */
 function PartySlider({ party, value, color, onChange }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 group">
       <PartyLogo party={party} size={20} />
       <span className="text-xs text-slate-400 w-28 truncate">{party}</span>
       <input
@@ -34,10 +34,10 @@ function PartySlider({ party, value, color, onChange }) {
 }
 
 const SCENARIOS = [
-  { label: "Jelenlegi", polls: { Fidesz: 39, Tisza: 44, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
-  { label: "Szoros", polls: { Fidesz: 43, Tisza: 43, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
-  { label: "Fidesz 2/3", polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
-  { label: "TISZA 2/3", polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "Jelenlegi", icon: "📊", polls: { Fidesz: 39, Tisza: 44, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "Szoros", icon: "⚔️", polls: { Fidesz: 43, Tisza: 43, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "Fidesz 2/3", icon: "🟠", polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+  { label: "TISZA 2/3", icon: "🟢", polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
 ];
 
 export default function MapPage({ polls: livePollData }) {
@@ -83,7 +83,7 @@ export default function MapPage({ polls: livePollData }) {
 
   return (
     <div className="space-y-6">
-            {/* Módszertani magyarázat */}
+      {/* Módszertani magyarázat */}
       <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
         <h3 className="text-sm font-bold text-amber-400 mb-2">⚠ Fontos: Ez egy becslés, nem jóslat!</h3>
         <p className="text-xs text-slate-400 leading-relaxed">
@@ -93,36 +93,47 @@ export default function MapPage({ polls: livePollData }) {
           Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság —
           a valóságban az egyéni jelöltek, helyi ügyek és kampány is számítanak.
           A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz —
-          <span className="text-amber-400/80 font-medium">de ezek mind feltételezések, egyik sem jóslat.
+          <span className="text-amber-400/80 font-medium"> de ezek mind feltételezések, egyik sem jóslat.
             A végső szót a szavazók mondják ki április 12-én.</span>
         </p>
       </div>
 
       {/* Csúszkák + összesítés */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
         {/* Csúszka panel */}
-        <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4">
-          <div className="flex items-center justify-between mb-1">
-            <h3 className="text-sm font-semibold text-white">Szavazati arányok</h3>
+        <div className={`rounded-2xl border p-5 transition-all duration-500 shadow-xl ${
+          useCustom
+            ? "bg-gradient-to-b from-amber-950/20 via-slate-900/90 to-slate-900/90 border-amber-500/30"
+            : "bg-slate-900/80 border-slate-700/50"
+        }`}>
+          
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wide">Szavazati arányok</h3>
             {useCustom && (
               <button
                 onClick={resetToDefault}
-                className="px-2 py-1 text-[10px] font-semibold text-white bg-cyan-600/90 rounded-lg border-b-2 border-r border-cyan-800 shadow-sm hover:bg-cyan-500 active:translate-y-[1px] active:border-b-0 transition-all"
+                className="px-2.5 py-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 rounded border border-emerald-500/30 hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
               >
-                Élő adatok
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Vissza az élőre
               </button>
             )}
           </div>
-          <div className="flex items-center gap-2 mb-4">
-            <p className="text-[10px] text-slate-500">
-              Húzd a csúszkákat — a térkép valós időben frissül
+          
+          <div className="flex items-center justify-between mb-6">
+            <p className="text-[10px] text-slate-500 leading-tight w-2/3">
+              Húzd a csúszkákat — a térkép és a mandátumok valós időben frissülnek!
             </p>
-            <span className={`px-1.5 py-0.5 rounded text-[9px] font-medium ${useCustom ? "bg-amber-500/20 text-amber-400" : "bg-emerald-500/20 text-emerald-400"}`}>
-              {useCustom ? "Egyéni" : "Élő"}
+            <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border ${
+              useCustom ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+            }`}>
+              {useCustom ? "Egyéni mód" : "Élő mód"}
             </span>
           </div>
 
-          <div className="space-y-3">
+          {/* Sliders */}
+          <div className="space-y-4">
             {Object.entries(activePolls)
               .sort(([, a], [, b]) => b - a)
               .map(([party, value]) => (
@@ -136,13 +147,16 @@ export default function MapPage({ polls: livePollData }) {
               ))}
           </div>
 
-          <div className={`mt-4 pt-3 border-t border-slate-700 text-xs ${totalPct > 100 ? "text-red-400" : totalPct < 95 ? "text-amber-400" : "text-slate-500"}`}>
-            Összesen: {totalPct.toFixed(1)}%
+          <div className={`mt-4 pt-3 border-t border-slate-700/50 text-xs font-medium flex justify-between items-center ${
+            totalPct > 100 ? "text-red-400" : totalPct < 95 ? "text-amber-400" : "text-slate-400"
+          }`}>
+            <span>Összesített arány:</span>
+            <span className="font-mono font-bold text-sm">{totalPct.toFixed(1)}%</span>
           </div>
 
           {/* Gyors forgatókönyvek */}
-          <div className="mt-4 pt-3 border-t border-slate-700">
-            <p className="text-[10px] text-slate-500 mb-2">Gyors forgatókönyvek kipróbálása:</p>
+          <div className="mt-6 pt-4 border-t border-slate-700/50">
+            <p className="text-[10px] uppercase font-bold tracking-widest text-slate-500 mb-3">Gyors forgatókönyvek</p>
             <div className="grid grid-cols-2 gap-2">
               {SCENARIOS.map((s) => (
                 <button
@@ -151,40 +165,46 @@ export default function MapPage({ polls: livePollData }) {
                     setUseCustom(true);
                     setCustomPolls(s.polls);
                   }}
-                  className="px-2 py-1.5 text-[10px] font-semibold text-white bg-blue-600/90 shadow-sm shadow-black/40 rounded-lg border-b-2 border-r border-blue-800 hover:bg-blue-500 hover:text-white active:translate-y-[1px] active:border-b-0 transition-all"
+                  className="flex items-center justify-center gap-1.5 px-2 py-2.5 text-[11px] font-medium text-slate-300 bg-slate-800/50 hover:bg-slate-700 hover:text-white rounded-lg border border-slate-700/50 hover:border-slate-500/50 transition-all group"
                 >
-                  {s.label}
+                  <span className="text-sm group-hover:scale-110 transition-transform">{s.icon}</span>
+                  <span className="truncate">{s.label}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* OEVK összesítés */}
-          <div className="mt-4 pt-3 border-t border-slate-700 space-y-2">
-            <div className="flex justify-between text-xs">
-              <span className="text-slate-400">Egyéni körzetek (106)</span>
+          <div className="mt-6 pt-4 border-t border-slate-700/50">
+            <div className="flex justify-between text-xs mb-4">
+              <span className="text-slate-400 font-bold uppercase tracking-wide">Egyéni körzetek (106)</span>
             </div>
-            <div className="flex justify-between items-center text-xs">
-              <span className="flex items-center gap-1.5">
-                <PartyLogo party="Tisza" size={18} />
-                <span className="text-slate-400">TISZA</span>
-              </span>
-              <span className="text-emerald-400 font-bold">{oevkSummary.tisza}</span>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center text-sm">
+                <span className="flex items-center gap-2">
+                  <PartyLogo party="Tisza" size={20} />
+                  <span className="text-slate-300 font-medium">TISZA</span>
+                </span>
+                <span className="text-emerald-400 font-black text-xl">{oevkSummary.tisza}</span>
+              </div>
+              
+              <div className="flex justify-between items-center text-sm">
+                <span className="flex items-center gap-2">
+                  <PartyLogo party="Fidesz" size={20} />
+                  <span className="text-slate-300 font-medium">Fidesz</span>
+                </span>
+                <span className="text-orange-400 font-black text-xl">{oevkSummary.fidesz}</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center text-xs">
-              <span className="flex items-center gap-1.5">
-                <PartyLogo party="Fidesz" size={18} />
-                <span className="text-slate-400">Fidesz</span>
-              </span>
-              <span className="text-orange-400 font-bold">{oevkSummary.fidesz}</span>
-            </div>
-            <div className="flex rounded-full overflow-hidden h-2 mt-1">
+
+            <div className="flex gap-1 h-3 mt-4 bg-slate-800 rounded-full overflow-hidden ring-1 ring-slate-900/50">
               <div
-                className="h-full transition-all duration-500"
+                className="h-full transition-all duration-700 rounded-l-full"
                 style={{ width: `${(oevkSummary.tisza / 106) * 100}%`, backgroundColor: PARTY_COLORS.Tisza }}
               />
               <div
-                className="h-full transition-all duration-500"
+                className="h-full transition-all duration-700 rounded-r-full"
                 style={{ width: `${(oevkSummary.fidesz / 106) * 100}%`, backgroundColor: PARTY_COLORS.Fidesz }}
               />
             </div>
@@ -192,7 +212,7 @@ export default function MapPage({ polls: livePollData }) {
         </div>
 
         {/* Térkép */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-3 bg-slate-900/30 rounded-2xl border border-slate-800/50 p-2 shadow-inner">
           <DistrictMap oevkDetails={oevkDetails} />
         </div>
       </div>

@@ -1,14 +1,50 @@
+import { useState } from "react";
 import PartyLogo from "./PartyLogo";
 import { t } from "../utils/i18n";
 
 export default function PollTable({ polls }) {
+  const [filter, setFilter] = useState("all");
+
   if (!polls || polls.length === 0) return null;
+
+  // Filter the data based on user selection
+  const filteredPolls = polls.filter((p) => {
+    if (filter === "all") return true;
+    const isGov = p.affiliation.toLowerCase().includes("government");
+    return filter === "gov" ? isGov : !isGov;
+  });
 
   return (
     <div className="card p-4 md:p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-white">{t("polltable.title")}</h2>
-        <span className="text-xs text-slate-500">{polls.length} {t("polltable.surveys")}</span>
+      
+      {/* Header and Filters */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <div>
+          <h2 className="text-lg font-semibold text-white">{t("polltable.title")}</h2>
+          <span className="text-xs text-slate-500">{filteredPolls.length} {t("polltable.surveys")}</span>
+        </div>
+
+                {/* Filter Toggle Buttons */}
+        <div className="flex p-1 bg-slate-900/50 rounded-lg border border-slate-700/50 w-fit self-start sm:self-auto">
+          <button 
+            onClick={() => setFilter("all")}
+            className={`px-3 py-1 text-xs rounded-md transition-all ${filter === "all" ? "bg-slate-700 text-white font-medium shadow-sm" : "text-slate-400 hover:text-slate-200"}`}
+          >
+            Összes
+          </button>
+          <button 
+            onClick={() => setFilter("ind")}
+            className={`px-3 py-1 text-xs rounded-md transition-all ${filter === "ind" ? "bg-slate-700 text-white font-medium shadow-sm" : "text-slate-400 hover:text-slate-200"}`}
+          >
+            Független
+          </button>
+          <button 
+            onClick={() => setFilter("gov")}
+            className={`px-3 py-1 text-xs rounded-md transition-all ${filter === "gov" ? "bg-slate-700 text-white font-medium shadow-sm" : "text-slate-400 hover:text-slate-200"}`}
+          >
+            Kormánypárti
+          </button>
+        </div>
       </div>
 
       {/* --- ASZTALI NÉZET: Eredeti táblázat (csak md mérettől felfelé látszik) --- */}
@@ -43,7 +79,7 @@ export default function PollTable({ polls }) {
             </tr>
           </thead>
           <tbody>
-            {polls.map((p, i) => {
+            {filteredPolls.map((p, i) => {
               const isGov = p.affiliation.toLowerCase().includes("government");
               const lead = p.tisza > p.fidesz
                 ? { party: "T", value: p.tisza - p.fidesz, color: "text-emerald-400" }
@@ -55,7 +91,15 @@ export default function PollTable({ polls }) {
                   className="border-b border-slate-800/50 transition-colors hover:bg-slate-800/30"
                 >
                   <td className="py-2.5 px-2 text-slate-500 text-xs whitespace-nowrap">
-                    {p.date}
+                    <div className="flex items-center gap-2">
+                      {p.date}
+                      {i === 0 && filter === "all" && (
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                        </span>
+                      )}
+                    </div>
                   </td>
                   <td className="py-2.5 px-2 text-slate-300 font-medium text-xs">
                     {p.pollster}
@@ -101,7 +145,7 @@ export default function PollTable({ polls }) {
 
       {/* --- MOBIL NÉZET: Kártyás elrendezés (csak mobil méreten látszik) --- */}
       <div className="block md:hidden space-y-3">
-        {polls.map((p, i) => {
+        {filteredPolls.map((p, i) => {
           const isGov = p.affiliation.toLowerCase().includes("government");
           const lead = p.tisza > p.fidesz
             ? { party: "TISZA", value: p.tisza - p.fidesz, color: "text-emerald-400" }
@@ -113,7 +157,15 @@ export default function PollTable({ polls }) {
               {/* Fejléc: Kutató, Dátum, Típus */}
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <div className="text-sm font-bold text-slate-200">{p.pollster}</div>
+                  <div className="text-sm font-bold text-slate-200 flex items-center gap-2">
+                    {p.pollster}
+                    {i === 0 && filter === "all" && (
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                      </span>
+                    )}
+                  </div>
                   <div className="text-[11px] text-slate-500 mt-0.5">{p.date}</div>
                 </div>
                 <span

@@ -187,7 +187,7 @@ export default function ParliamentChart({ polls: livePollData }) {
           <span className="text-amber-400/80 font-medium"> de ezek mind feltételezések, egyik sem jóslat.
           A végső szót a szavazók mondják ki április 12-én.</span>
         </p>
-        </div>
+      </div>
 
       {/* ── Edukációs Szekció ── */}
       <div className="bg-slate-800/80 rounded-xl border-b-2 border-r border-slate-700 shadow-sm shadow-black/40 overflow-hidden transition-all duration-300">
@@ -458,13 +458,13 @@ export default function ParliamentChart({ polls: livePollData }) {
 
           {/* Gyors szcenáriók */}
           <div className="mt-4 pt-3 border-t border-slate-700">
-            <p className="text-[10px] text-slate-500 mb-2">{t("parliament.scenarios")}</p>
+            <p className="text-[10px] uppercase font-bold tracking-widest text-slate-500 mb-3">{t("parliament.scenarios")}</p>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: t("parliament.sc.current"), polls: { Fidesz: 39, Tisza: 44, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
-                { label: t("parliament.sc.close"), polls: { Fidesz: 43, Tisza: 43, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
-                { label: t("parliament.sc.fidesz23"), polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
-                { label: t("parliament.sc.tisza23"), polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.current"), icon: "📊", polls: { Fidesz: 39, Tisza: 44, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.close"), icon: "⚔️", polls: { Fidesz: 43, Tisza: 43, "Mi Hazánk": 6, DK: 1, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.fidesz23"), icon: "🟠", polls: { Fidesz: 55, Tisza: 30, "Mi Hazánk": 7, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
+                { label: t("parliament.sc.tisza23"), icon: "🟢", polls: { Fidesz: 33, Tisza: 50, "Mi Hazánk": 8, DK: 2, Momentum: 0, "MSZP-Párbeszéd": 0, LMP: 0 } },
               ].map((s) => (
                 <button
                   key={s.label}
@@ -472,8 +472,10 @@ export default function ParliamentChart({ polls: livePollData }) {
                     setUseCustom(true);
                     setCustomPolls(s.polls);
                   }}
-className="px-2 py-1.5 text-[10px] font-semibold text-white bg-blue-600/90 shadow-sm shadow-black/40 rounded-lg border-b-2 border-r border-blue-800 hover:bg-blue-500 hover:text-white active:translate-y-[1px] active:border-b-0 transition-all"                >
-                  {s.label}
+                  className="flex items-center justify-center gap-1.5 px-2 py-2 text-[11px] font-medium text-slate-300 bg-slate-800/50 hover:bg-slate-700 hover:text-white rounded-lg border border-slate-700/50 hover:border-slate-500/50 transition-all group"
+                >
+                  <span className="text-sm group-hover:scale-110 transition-transform">{s.icon}</span>
+                  <span className="truncate">{s.label}</span>
                 </button>
               ))}
             </div>
@@ -491,67 +493,76 @@ className="px-2 py-1.5 text-[10px] font-semibold text-white bg-blue-600/90 shado
         const has133 = coalitionSeats >= 133;
 
         return (
-          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-5">
-            <div className="mb-4">
-              <h3 className="text-sm font-bold text-white">{t("coalition.title")}</h3>
-              <p className="text-[10px] text-slate-500">{t("coalition.subtitle")}</p>
+          <div className="bg-slate-900/80 rounded-2xl border border-slate-700/50 p-6 relative overflow-hidden shadow-xl">
+            {/* Ambient glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-[80px] pointer-events-none rounded-full" />
+            
+            <div className="relative z-10 mb-6">
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-amber-400"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                {t("coalition.title")}
+              </h3>
+              <p className="text-[11px] text-slate-400 mt-1">{t("coalition.subtitle")}</p>
             </div>
 
             {/* Party tiles */}
-            <div className="flex gap-3 mb-5">
+            <div className="relative z-10 flex flex-wrap sm:flex-nowrap gap-3 mb-8 items-center">
               {COALITION_PARTIES.map((p) => {
                 const r = results.find((r) => r.party === p);
                 return (
-                  <div key={p} className="flex-1 flex items-center gap-3 bg-slate-800/50 rounded-xl border border-slate-700 px-4 py-3">
-                    <PartyLogo party={p} size={28} />
+                  <div key={p} className="flex-1 min-w-[120px] flex items-center gap-3 bg-slate-800/60 rounded-xl border border-slate-700/50 px-4 py-3 shadow-inner">
+                    <PartyLogo party={p} size={32} className="drop-shadow-md" />
                     <div>
-                      <div className="text-xs text-slate-400">{p}</div>
-                      <div className="text-xl font-bold text-white">{r?.total || 0}</div>
-                      <div className="text-[10px] text-slate-500">{t("coalition.seats")}</div>
+                      <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">{p}</div>
+                      <div className="text-2xl font-black text-white tabular-nums leading-none mt-1">{r?.total || 0}</div>
                     </div>
                   </div>
                 );
               })}
-              <div className="flex items-center justify-center px-3 text-slate-600 text-xl">+</div>
-              <div className="flex-1 flex items-center justify-center bg-slate-800/30 rounded-xl border border-slate-700/50 px-4 py-3">
-                <div className="text-center">
-                  <div className="text-2xl font-black text-white">{coalitionSeats}</div>
-                  <div className="text-[10px] text-slate-400">{t("coalition.seats")} / 199</div>
+              <div className="hidden sm:flex items-center justify-center px-1 text-slate-600 text-xl font-light">=</div>
+              
+              {/* Total Seats Box */}
+              <div className="w-full sm:w-auto sm:flex-1 flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-slate-700 px-4 py-3 shadow-[inset_0_2px_10px_rgba(0,0,0,0.3)]">
+                <div className="text-3xl font-black tabular-nums bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+                  {coalitionSeats}
                 </div>
+                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Összesen</div>
               </div>
             </div>
 
             {/* Progress bar */}
-            <div className="relative mb-8">
-              <div className="h-8 bg-slate-800 rounded-full overflow-hidden">
+            <div className="relative z-10 mb-8 pt-2">
+              <div className="h-6 bg-slate-950 rounded-full overflow-hidden shadow-inner ring-1 ring-white/5">
                 <div
-                  className="h-full rounded-full flex items-center justify-center text-xs font-bold text-white transition-all duration-700"
-                  style={{ width: `${Math.min(100, (coalitionSeats / 199) * 100)}%`, backgroundColor: "#f97316" }}
+                  className="h-full bg-gradient-to-r from-orange-600 to-green-600 flex items-center justify-end pr-2 text-[10px] font-bold text-white/90 transition-all duration-700"
+                  style={{ width: `${Math.min(100, (coalitionSeats / 199) * 100)}%` }}
                 >
-                  {coalitionSeats} / 199
+                  {coalitionSeats > 20 && `${coalitionSeats} szék`}
                 </div>
               </div>
-              <div className="absolute top-0 h-8 border-l-2 border-dashed border-yellow-500/60" style={{ left: `${(100/199)*100}%` }}>
-                <span className="absolute top-9 -left-3 text-[9px] text-yellow-500/60">100</span>
+              
+              {/* Markers */}
+              <div className="absolute top-0 h-10 border-l border-dashed border-yellow-500/60" style={{ left: `${(100/199)*100}%` }}>
+                <div className="absolute top-10 -left-6 bg-slate-900 px-2 py-0.5 rounded text-[9px] font-bold text-yellow-500 border border-yellow-500/20 whitespace-nowrap">100 (Többség)</div>
               </div>
-              <div className="absolute top-0 h-8 border-l-2 border-dashed border-red-500/60" style={{ left: `${(133/199)*100}%` }}>
-                <span className="absolute top-9 -left-3 text-[9px] text-red-500/60">133</span>
+              <div className="absolute top-0 h-10 border-l border-dashed border-red-500/60" style={{ left: `${(133/199)*100}%` }}>
+                <div className="absolute top-10 -left-4 bg-slate-900 px-2 py-0.5 rounded text-[9px] font-bold text-red-400 border border-red-500/20 whitespace-nowrap">133 (2/3)</div>
               </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className="relative z-10 flex justify-center mt-6">
               {has133 ? (
-                <span className="px-4 py-2 text-sm font-bold bg-red-500/20 text-red-400 rounded-full border border-red-500/20">
-                  {t("coalition.has133")}
-                </span>
+                <div className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-red-500/10 text-red-400 rounded-full border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                  <span>🏆</span> {t("coalition.has133")}
+                </div>
               ) : has100 ? (
-                <span className="px-4 py-2 text-sm font-bold bg-emerald-500/20 text-emerald-400 rounded-full border border-emerald-500/20">
-                  {t("coalition.has100")}
-                </span>
+                <div className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                  <span>✅</span> {t("coalition.has100")}
+                </div>
               ) : (
-                <span className="px-4 py-2 text-sm font-bold bg-slate-500/20 text-slate-400 rounded-full border border-slate-500/20">
-                  {t("coalition.noMaj")} {100 - coalitionSeats} {t("coalition.missing")}
-                </span>
+                <div className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-slate-800 text-slate-400 rounded-full border border-slate-700">
+                  <span>❌</span> {t("coalition.noMaj")} {100 - coalitionSeats} {t("coalition.missing")}
+                </div>
               )}
             </div>
           </div>

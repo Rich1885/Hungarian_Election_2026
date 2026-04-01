@@ -8,8 +8,8 @@ export default function PriceChart({ data }) {
   if (!data || data.length < 5) return null;
 
   const w = 400;
-  const h = 160; // Kicsit magasabb, hogy elférjen a tooltip
-  const padY = 20;
+  const h = 180; // Picit magasabb a jobb olvashatóságért
+  const padY = 24;
 
   // 1. Adatok szűrése a kiválasztott időtáv alapján
   const filteredData = useMemo(() => {
@@ -25,7 +25,7 @@ export default function PriceChart({ data }) {
 
   // 2. Gyertyák generálása
   const candles = useMemo(() => {
-    const chunkCount = 30; 
+    const chunkCount = 36; // Picit több gyertya a szebb felbontásért
     const chunkSize = Math.max(1, Math.floor(filteredData.length / chunkCount));
     
     const result = [];
@@ -51,17 +51,20 @@ export default function PriceChart({ data }) {
   const allPrices = filteredData.map(d => d.p);
   const min = Math.min(...allPrices);
   const max = Math.max(...allPrices);
-  const range = max - min || 0.01;
-  const getY = (val) => h - padY - ((val - min) / range) * (h - padY * 2);
+  // Paddingoljuk a tartományt, hogy a gyertyák ne lógjanak ki a képből
+  const rangePadding = (max - min) * 0.1;
+  const range = (max - min) + (rangePadding * 2) || 0.01;
+  const getY = (val) => h - padY - ((val - (min - rangePadding)) / range) * (h - padY * 2);
 
-  const BULL_COLOR = "#0ecb81"; 
-  const BEAR_COLOR = "#f6465d"; 
-  const LINE_COLOR = "#1e293b"; 
+  // Modern kripto/tőzsde színek
+  const BULL_COLOR = "#10b981"; // Emerald-500
+  const BEAR_COLOR = "#ef4444"; // Red-500
+  const LINE_COLOR = "rgba(51, 65, 85, 0.4)"; // Slate-700/40
 
-  const candleWidth = (w / candles.length) * 0.6;
   const spaceWidth = w / candles.length;
+  const candleWidth = spaceWidth * 0.65; // Picit vastagabb gyertyák
 
-  // 3. Teljesítmény kiszámítása (Mennyit változott a periódus alatt?)
+  // 3. Teljesítmény kiszámítása
   const firstPrice = candles[0].open;
   const lastPrice = candles[candles.length - 1].close;
   const deltaPrice = lastPrice - firstPrice;
@@ -70,30 +73,45 @@ export default function PriceChart({ data }) {
 
   return (
     <div 
-      className="relative group bg-[#0b0e11] p-3 rounded-xl border border-slate-800"
-      onMouseLeave={() => setHoveredCandle(null)} // Ha elvisszük az egeret, eltűnik a tooltip
+      className="relative group bg-slate-900/60 rounded-2xl border border-slate-700/50 p-4 shadow-xl overflow-hidden"
+      onMouseLeave={() => setHoveredCandle(null)} 
     >
-      
+      {/* Background Glow */}
+      <div 
+        className="absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 pointer-events-none rounded-full"
+        style={{ backgroundColor: isPositive ? BULL_COLOR : BEAR_COLOR }}
+      />
+
       {/* ── Fejléc: Ár, Változás és Időtáv ── */}
-      <div className="flex items-start justify-between mb-3 px-1">
+      <div className="relative z-10 flex items-start justify-between mb-6">
         <div>
-          <div className="text-xl font-bold text-white leading-none">
-            {(lastPrice * 100).toFixed(1)}%
+          <div className="flex items-baseline gap-2">
+            <span className="text-3xl font-black text-white tracking-tight tabular-nums drop-shadow-sm">
+              {(lastPrice * 100).toFixed(1)}%
+            </span>
           </div>
-          <div className={`text-xs font-semibold mt-1 ${isPositive ? "text-[#0ecb81]" : "text-[#f6465d]"}`}>
-            {isPositive ? "+" : ""}{deltaPct}% <span className="text-slate-500 font-normal">({timeframe})</span>
+          <div className={`flex items-center gap-1.5 text-xs font-bold mt-1 tracking-wide ${isPositive ? "text-emerald-400" : "text-red-400"}`}>
+            <span className={`flex items-center justify-center w-4 h-4 rounded-full ${isPositive ? "bg-emerald-500/20" : "bg-red-500/20"}`}>
+              {isPositive ? (
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              ) : (
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              )}
+            </span>
+            {isPositive ? "+" : ""}{deltaPct}% 
+            <span className="text-slate-500 font-medium ml-1">az elmúlt {timeframe === "1W" ? "7 napban" : "30 napban"}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 bg-slate-900 rounded-lg p-1 border border-slate-800">
+        <div className="flex items-center gap-1 bg-slate-950/80 rounded-full p-1 border border-slate-800 shadow-inner">
           {["1W", "1M"].map((tf) => (
             <button
               key={tf}
               onClick={() => setTimeframe(tf)}
-              className={`px-2.5 py-1 text-[10px] font-bold rounded-md transition-colors ${
+              className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 ${
                 timeframe === tf
-                  ? "bg-slate-700 text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-300"
+                  ? "bg-slate-700 text-white shadow-md"
+                  : "text-slate-400 hover:text-white"
               }`}
             >
               {tf}
@@ -103,13 +121,22 @@ export default function PriceChart({ data }) {
       </div>
 
       {/* ── Grafikon ── */}
-      <div className="relative">
-        <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-40" preserveAspectRatio="none">
+      <div className="relative z-10">
+        <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto drop-shadow-sm" preserveAspectRatio="none">
           
           {/* Rácsvonalak */}
           {[0.25, 0.5, 0.75].map((f) => (
-            <line key={f} x1={0} y1={h * f} x2={w} y2={h * f} stroke={LINE_COLOR} strokeWidth="0.5" />
+            <line key={f} x1={0} y1={h * f} x2={w} y2={h * f} stroke={LINE_COLOR} strokeWidth="1" strokeDasharray="2 4" />
           ))}
+
+          {/* Aktuális ár vonala (Csak ha nincs hover) */}
+          {!hoveredCandle && (
+            <line
+              x1={0} y1={getY(lastPrice)} x2={w} y2={getY(lastPrice)}
+              stroke={isPositive ? BULL_COLOR : BEAR_COLOR}
+              strokeWidth="1.5" strokeDasharray="4 4" className="opacity-50"
+            />
+          )}
 
           {/* Gyertyák */}
           {candles.map((candle, i) => {
@@ -121,33 +148,29 @@ export default function PriceChart({ data }) {
             const boxTop = Math.min(yOpen, yClose);
             const boxHeight = Math.max(1, Math.max(yOpen, yClose) - boxTop);
 
-            // Ha hoverolnak a gyertyán, picit halványítjuk a többit
+            // Hover effektus
             const isHovered = hoveredCandle?.index === i;
-            const opacity = hoveredCandle && !isHovered ? "0.3" : "1";
-
+            const opacity = hoveredCandle && !isHovered ? "0.2" : "1";
+            
             return (
-              <g key={i} className="transition-opacity duration-200" style={{ opacity }}>
-                <line x1={xCenter} y1={getY(candle.high)} x2={xCenter} y2={getY(candle.low)} stroke={color} strokeWidth="1.5" />
-                <rect x={xCenter - candleWidth / 2} y={boxTop} width={candleWidth} height={boxHeight} fill={color} rx="1" />
+              <g key={i} className="transition-opacity duration-300" style={{ opacity }}>
+                {/* Kanóc */}
+                <line x1={xCenter} y1={getY(candle.high)} x2={xCenter} y2={getY(candle.low)} stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+                {/* Test */}
+                <rect x={xCenter - candleWidth / 2} y={boxTop} width={candleWidth} height={boxHeight} fill={color} rx="1.5" />
               </g>
             );
           })}
 
-          {/* Aktuális ár vonala (Csak ha nincs hover) */}
-          {!hoveredCandle && (
-            <line
-              x1={0} y1={getY(lastPrice)} x2={w} y2={getY(lastPrice)}
-              stroke={lastPrice >= firstPrice ? BULL_COLOR : BEAR_COLOR}
-              strokeWidth="1" strokeDasharray="3 3" className="opacity-50"
-            />
-          )}
-
           {/* ── Hover Crosshair (Függőleges vonal) ── */}
           {hoveredCandle && (
-            <line
-              x1={hoveredCandle.x} y1={0} x2={hoveredCandle.x} y2={h}
-              stroke="#64748b" strokeWidth="1" strokeDasharray="4 4" className="opacity-50"
-            />
+            <>
+              <line
+                x1={hoveredCandle.x} y1={0} x2={hoveredCandle.x} y2={h}
+                stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 4" className="opacity-40 pointer-events-none"
+              />
+              <circle cx={hoveredCandle.x} cy={getY(hoveredCandle.candle.close)} r="3" fill="#fff" className="pointer-events-none drop-shadow-md" />
+            </>
           )}
 
           {/* Láthatatlan réteg a Hover érzékeléséhez */}
@@ -167,15 +190,26 @@ export default function PriceChart({ data }) {
         {/* ── Lebegő Tooltip (Pontos adatok) ── */}
         {hoveredCandle && (
           <div 
-            className="absolute top-0 transform -translate-x-1/2 -translate-y-full mb-2 bg-slate-800 border border-slate-700 text-white text-[10px] py-1 px-2 rounded pointer-events-none shadow-lg whitespace-nowrap z-10"
-            style={{ left: `${(hoveredCandle.x / w) * 100}%`, marginTop: '10px' }}
+            className="absolute top-0 transform -translate-x-1/2 -translate-y-full mb-3 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 p-2.5 rounded-xl pointer-events-none shadow-[0_10px_30px_rgba(0,0,0,0.5)] z-20 w-32"
+            style={{ 
+              left: `${Math.max(15, Math.min(85, (hoveredCandle.x / w) * 100))}%`, // Ne lógjon ki a szélén
+              marginTop: '15px' 
+            }}
           >
-            <div className="text-slate-400 mb-0.5">
+            <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-2 border-b border-slate-700/50 pb-1.5 text-center">
               {new Date(hoveredCandle.candle.t * 1000).toLocaleString("hu", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
             </div>
-            <div className="font-bold font-mono">
-              <span className="text-slate-500">O:</span> {(hoveredCandle.candle.open * 100).toFixed(1)}%{" "}
-              <span className="text-slate-500 ml-1">C:</span> {(hoveredCandle.candle.close * 100).toFixed(1)}%
+            <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
+              <div className="flex flex-col items-center">
+                <span className="text-slate-500 uppercase text-[8px] mb-0.5">Nyitó</span>
+                <span className="text-white font-bold">{(hoveredCandle.candle.open * 100).toFixed(1)}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-slate-500 uppercase text-[8px] mb-0.5">Záró</span>
+                <span className={`font-bold ${hoveredCandle.candle.close >= hoveredCandle.candle.open ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {(hoveredCandle.candle.close * 100).toFixed(1)}
+                </span>
+              </div>
             </div>
           </div>
         )}
@@ -183,11 +217,11 @@ export default function PriceChart({ data }) {
         {/* ── Aktuális Ár Címke a Jobb Szélen ── */}
         {!hoveredCandle && (
           <div 
-            className="absolute right-0 text-[9px] font-bold text-white px-1 py-0.5 rounded shadow pointer-events-none"
+            className="absolute right-0 text-[10px] font-black text-white px-2 py-1 rounded-l-md shadow-md pointer-events-none"
             style={{ 
               top: `${(getY(lastPrice) / h) * 100}%`, 
               transform: 'translateY(-50%)',
-              backgroundColor: lastPrice >= firstPrice ? BULL_COLOR : BEAR_COLOR 
+              backgroundColor: isPositive ? BULL_COLOR : BEAR_COLOR 
             }}
           >
             {(lastPrice * 100).toFixed(1)}%
@@ -195,9 +229,10 @@ export default function PriceChart({ data }) {
         )}
       </div>
 
-      <div className="flex justify-between items-center text-[9px] text-slate-500 mt-2 px-1 font-mono">
+      {/* ── Alsó Tengely (Dátumok) ── */}
+      <div className="flex justify-between items-center text-[10px] text-slate-500 mt-4 px-1 font-bold uppercase tracking-wider">
         <span>{new Date(filteredData[0].t * 1000).toLocaleDateString("hu", { month: "short", day: "numeric" })}</span>
-        <span>{new Date(filteredData[filteredData.length - 1].t * 1000).toLocaleTimeString("hu", { hour: "2-digit", minute: "2-digit" })}</span>
+        <span>Ma, {new Date(filteredData[filteredData.length - 1].t * 1000).toLocaleTimeString("hu", { hour: "2-digit", minute: "2-digit" })}</span>
       </div>
     </div>
   );
