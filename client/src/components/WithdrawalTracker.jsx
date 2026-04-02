@@ -388,7 +388,7 @@ export default function WithdrawalTracker() {
                   <path d="M15 9l-6 6M9 9l6 6" />
                 </svg>
                 {t("withdraw.nonWithdrawals")}
-                <span className="text-[9px] text-slate-500 font-normal normal-case tracking-normal ml-1 hidden sm:inline-block">— {t("withdraw.nonWithdrawals.desc")}</span>
+                <span className="text-[9px] text-slate-500 font-normal normal-case tracking-normal ml-1 hidden sm:inline-block">- {t("withdraw.nonWithdrawals.desc")}</span>
               </h4>
               <div className="space-y-3">
                 {data.notableNonWithdrawals.map((nw, i) => (
@@ -438,7 +438,7 @@ export default function WithdrawalTracker() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
                 {t("withdraw.mszpIndep")}
-                <span className="text-[9px] text-slate-500 font-normal normal-case tracking-normal ml-1 hidden sm:inline-block">— {t("withdraw.mszpIndep.desc")}</span>
+                <span className="text-[9px] text-slate-500 font-normal normal-case tracking-normal ml-1 hidden sm:inline-block">- {t("withdraw.mszpIndep.desc")}</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {data.mszpIndependents.map((ind, i) => (

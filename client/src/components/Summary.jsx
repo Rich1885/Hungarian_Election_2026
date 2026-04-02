@@ -59,7 +59,8 @@ export default function Summary({ markets, polls, news }) {
       {/* 1. HERO RACE OVERVIEW */}
       <div className="bg-slate-900/80 rounded-2xl border border-slate-700/50 p-6 relative overflow-hidden shadow-2xl">
         {/* Decorative background glow */}
-        <div className={`absolute top-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 pointer-events-none -translate-y-1/2 ${avgTisza > avgFidesz ? 'bg-emerald-500 -right-1/4' : 'bg-orange-500 -left-1/4'}`} />
+        <div className="absolute top-0 -left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 pointer-events-none -translate-y-1/2 bg-orange-500" />
+        <div className="absolute top-0 -right-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 pointer-events-none -translate-y-1/2 bg-emerald-500" />
         
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
           

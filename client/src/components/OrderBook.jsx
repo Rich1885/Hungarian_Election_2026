@@ -22,7 +22,7 @@ export default function OrderBook({ data }) {
 
   const spread = asks.length > 0 && bids.length > 0
     ? ((asks[0].price - bids[0].price) * 100).toFixed(1)
-    : "—";
+    : "-";
 
   return (
     <div className="bg-slate-900/60 rounded-xl border border-slate-700/50 p-4 shadow-inner relative overflow-hidden">

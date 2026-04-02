@@ -6,7 +6,7 @@ import { t } from "../utils/i18n";
 import PartyLogo from "./PartyLogo";
 
 function fmtMoney(v) {
-  if (!v) return "—";
+  if (!v) return "-";
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(2)}M`;
   if (v >= 1_000) return `$${(v / 1_000).toFixed(1)}K`;
   return `$${v.toFixed(0)}`;
@@ -91,8 +91,8 @@ export default function PartyCard({ market, isLeader = false }) {
   const weekChg = market.oneWeekPriceChange * 100;
 
   return (
-    <div className={`relative bg-slate-900/60 rounded-2xl border ${style.border} ${style.glow} backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-slate-900/80`}>
-      
+    <div className={`group relative bg-slate-900/60 rounded-2xl border ${style.border} ${style.glow} backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-slate-900/80`}>
+
       {/* Kiemelt "Leader" Badge ha ez a kártya vezet */}
       {isLeader && (
         <div className="absolute top-4 right-4 z-10">
@@ -105,9 +105,17 @@ export default function PartyCard({ market, isLeader = false }) {
 
       {/* Top Header Gradient Line */}
       <div className={`absolute top-0 left-0 w-full h-1 ${style.line}`} />
-      
+
       {/* Ambient background glow */}
       <div className={`absolute -top-20 -left-20 w-64 h-64 blur-[100px] pointer-events-none opacity-40 ${style.bg}`} />
+
+      {/* Hover glow effect */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[80px] pointer-events-none rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+        partyName.toLowerCase().includes('tisza') ? 'bg-emerald-500' :
+        partyName.toLowerCase().includes('fidesz') ? 'bg-orange-500' :
+        partyName.toLowerCase().includes('dk') ? 'bg-blue-500' :
+        'bg-green-500'
+      }`} />
 
       <div className="p-5 sm:p-7 relative z-10">
         

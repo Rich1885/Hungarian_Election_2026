@@ -91,7 +91,7 @@ export default function DistrictMap({ oevkDetails }) {
         <div>
           <h3 className="text-sm font-bold text-white">Egyéni választókerületek (OEVK)</h3>
           <p className="text-[10px] text-slate-500">
-            106 körzet — Uniform National Swing becslés a 2022-es eredmények alapján
+            106 körzet - Uniform National Swing becslés a 2022-es eredmények alapján
           </p>
         </div>
         <div className="flex gap-3 text-xs">
@@ -200,7 +200,7 @@ export default function DistrictMap({ oevkDetails }) {
               <span className="text-xs font-bold text-white">{hoveredDistrict.name}</span>
             </div>
             <div className="text-[10px] text-slate-400 mb-2">
-              {hoveredDistrict.county} megye — OEVK #{hoveredDistrict.num}
+              {hoveredDistrict.county} megye - OEVK #{hoveredDistrict.num}
             </div>
             <div className="flex justify-between text-[11px]">
               <span className="text-slate-400">Becsült győztes:</span>

@@ -90,9 +90,9 @@ export default function MapPage({ polls: livePollData }) {
           A térkép a <span className="text-white font-medium">2022-es és 2024-es EP tényleges választási eredményeket</span> kombinálja
           az <span className="text-white font-medium">összes elérhető közvélemény-kutatás átlagával</span>, és ebből becsüli meg,
           hogy az egyes körzetekben melyik párt nyerne (<span className="text-slate-300">Uniform National Swing modell</span>).
-          Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság —
+          Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság -
           a valóságban az egyéni jelöltek, helyi ügyek és kampány is számítanak.
-          A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz —
+          A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz -
           <span className="text-amber-400/80 font-medium"> de ezek mind feltételezések, egyik sem jóslat.
             A végső szót a szavazók mondják ki április 12-én.</span>
         </p>
@@ -123,7 +123,7 @@ export default function MapPage({ polls: livePollData }) {
           
           <div className="flex items-center justify-between mb-6">
             <p className="text-[10px] text-slate-500 leading-tight w-2/3">
-              Húzd a csúszkákat — a térkép és a mandátumok valós időben frissülnek!
+              Húzd a csúszkákat - a térkép és a mandátumok valós időben frissülnek!
             </p>
             <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border ${
               useCustom ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"

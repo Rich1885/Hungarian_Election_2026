@@ -2,14 +2,14 @@ import PartyLogo from "./PartyLogo";
 import { t } from "../utils/i18n";
 
 function fmtMoney(v) {
-  if (!v) return "—";
+  if (!v) return "-";
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(2)}M`;
   if (v >= 1_000) return `$${(v / 1_000).toFixed(1)}K`;
   return `$${v.toFixed(0)}`;
 }
 
 function fmtChange(v) {
-  if (!v && v !== 0) return <span className="text-slate-600">—</span>;
+  if (!v && v !== 0) return <span className="text-slate-600">-</span>;
   const pct = (v * 100).toFixed(1);
   if (v > 0) return <span className="text-emerald-400 font-medium">+{pct}%</span>;
   if (v < 0) return <span className="text-red-400 font-medium">{pct}%</span>;
@@ -174,7 +174,7 @@ export default function OverviewTable({ markets }) {
                   {/* 24h Volumen */}
                   <td className="py-4 px-4 text-right">
                     <span className="font-mono text-[13px] font-medium text-slate-300 group-hover:text-white transition-colors">
-                      {m.volume24hr > 0 ? fmtMoney(m.volume24hr) : <span className="text-slate-600">—</span>}
+                      {m.volume24hr > 0 ? fmtMoney(m.volume24hr) : <span className="text-slate-600">-</span>}
                     </span>
                   </td>
 

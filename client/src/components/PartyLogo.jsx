@@ -3,41 +3,16 @@
  * Premium Glass/Neon aesthetics for Dark Mode
  */
 
-// TISZA – red & green infinity ribbon on white circle
+// TISZA – PNG logo
 function TiszaLogo({ size }) {
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size}>
-      <defs>
-        <linearGradient id="tiszaBg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1e293b" />
-          <stop offset="100%" stopColor="#0f172a" />
-        </linearGradient>
-        <filter id="glow">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="rgba(0,0,0,0.5)" />
-        </filter>
-      </defs>
-      <rect width="100" height="100" rx="22" fill="url(#tiszaBg)" />
-      {/* Vékony border */}
-      <rect width="96" height="96" x="2" y="2" rx="20" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2" />
-      
-      <circle cx="50" cy="50" r="35" fill="white" filter="url(#glow)" />
-      
-      {/* Left loop (red/coral) */}
-      <path
-        d="M50 50 C50 38, 38 30, 28 36 C18 42, 18 58, 28 64 C38 70, 50 62, 50 50Z"
-        fill="none" stroke="#f43f5e" strokeWidth="6.5" strokeLinecap="round" filter="url(#glow)"
-      />
-      {/* Right loop (green/teal) */}
-      <path
-        d="M50 50 C50 38, 62 30, 72 36 C82 42, 82 58, 72 64 C62 70, 50 62, 50 50Z"
-        fill="none" stroke="#10b981" strokeWidth="6.5" strokeLinecap="round" filter="url(#glow)"
-      />
-      {/* Center crossing overlap - red passes over */}
-      <path
-        d="M46 46 C48 48, 52 52, 54 54"
-        stroke="#f43f5e" strokeWidth="7" strokeLinecap="round"
-      />
-    </svg>
+    <img
+      src="/tiszalogo.jpg.png"
+      alt="Tisza"
+      width={size}
+      height={size}
+      style={{ borderRadius: '22%', objectFit: 'cover' }}
+    />
   );
 }
 

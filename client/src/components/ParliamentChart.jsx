@@ -104,7 +104,7 @@ function ResultBar({ results }) {
           style={{ left: `${(100 / total) * 100}%` }}
         >
           <span className="absolute -top-0.5 left-1 text-[9px] text-yellow-500/60 whitespace-nowrap">
-            100 — {t("parliament.majority.badge")}
+            100 - {t("parliament.majority.badge")}
           </span>
         </div>
         <div
@@ -112,7 +112,7 @@ function ResultBar({ results }) {
           style={{ left: `${(133 / total) * 100}%` }}
         >
           <span className="absolute -top-0.5 left-1 text-[9px] text-red-500/60 whitespace-nowrap">
-            133 — {t("parliament.2thirds.badge")}
+            133 - {t("parliament.2thirds.badge")}
           </span>
         </div>
       </div>
@@ -181,9 +181,9 @@ export default function ParliamentChart({ polls: livePollData }) {
           A modell a <span className="text-white font-medium">2022-es és 2024-es EP tényleges választási eredményeket</span> kombinálja
           az <span className="text-white font-medium">összes elérhető közvélemény-kutatás átlagával</span>, és ebből becsüli meg,
           hogy az egyes körzetekben melyik párt nyerne (<span className="text-slate-300">Uniform National Swing modell</span>).
-          Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság —
+          Ez azt feltételezi, hogy minden körzetben azonos mértékben változik a támogatottság -
           a valóságban az egyéni jelöltek, helyi ügyek és kampány is számítanak.
-          A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz —
+          A csúszkákkal és a 4 gyors forgatókönyvvel kísérletezhetsz -
           <span className="text-amber-400/80 font-medium"> de ezek mind feltételezések, egyik sem jóslat.
           A végső szót a szavazók mondják ki április 12-én.</span>
         </p>
@@ -241,7 +241,7 @@ export default function ParliamentChart({ polls: livePollData }) {
               <h4 className="text-xs font-bold text-emerald-400 mb-2 uppercase tracking-wider">{t("edu.2.title")}</h4>
               <p className="text-xs text-slate-400 leading-relaxed mb-3">
                 A vesztes jelöltek <span className="text-white font-medium">összes szavazata</span> automatikusan a pártjuk országos listájához
-                adódik. Ez a kisebb pártoknak kedvez — a szavazataik nem vesznek el, hanem
+                adódik. Ez a kisebb pártoknak kedvez - a szavazataik nem vesznek el, hanem
                 <span className="text-emerald-400 font-medium"> listás mandátumokat kapnak belőle</span>.
               </p>
               <div className="bg-slate-800/50 rounded-lg p-3 text-xs text-slate-400">
@@ -280,7 +280,7 @@ export default function ParliamentChart({ polls: livePollData }) {
               <h4 className="text-xs font-bold text-red-400 mb-2 uppercase tracking-wider">{t("edu.4.title")}</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Csak az <span className="text-white font-medium">5% feletti pártok</span> jutnak be a parlamentbe listáról.
-                Az ez alatti pártok szavazatai <span className="text-red-400 font-medium">teljesen elvesznek</span> — nem kerülnek
+                Az ez alatti pártok szavazatai <span className="text-red-400 font-medium">teljesen elvesznek</span> - nem kerülnek
                 át más pártokhoz. Ez erősen ösztönzi a stratégiai szavazást: egy 3%-os pártra adott szavazat effektíve „elveszett szavazat".
               </p>
             </div>
