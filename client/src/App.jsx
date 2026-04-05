@@ -12,6 +12,7 @@ import ParliamentChart from "./components/ParliamentChart";
 import MapPage from "./components/MapPage";
 import YouTubeFeed from "./components/YouTubeFeed";
 import WithdrawalTracker from "./components/WithdrawalTracker";
+import LivePage from "./components/LivePage";
 import { t, setLanguage, getLanguage } from "./utils/i18n";
 
 export default function App() {
@@ -99,6 +100,7 @@ export default function App() {
     { id: "news", label: t("tab.news") },
     { id: "youtube", label: t("tab.youtube") },
     { id: "markets", label: t("tab.markets") },
+    { id: "live", label: "ÉLŐ ADÁS" },
   ];
 
   return (
@@ -109,10 +111,10 @@ export default function App() {
       <nav className="sticky top-0 z-50 bg-[#0a0a0f]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-14">
-            
+
             {/* ── Hamburger Menu Button (Only visible on mobile) ── */}
             <div className="lg:hidden flex items-center">
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 -ml-2 text-slate-400 hover:text-white transition-colors"
                 aria-label="Menu"
@@ -125,7 +127,7 @@ export default function App() {
                   )}
                 </svg>
               </button>
-              
+
               {/* Aktuális tab címe mobilon a hamburger mellett */}
               <span className="ml-2 font-medium text-cyan-400 text-sm">
                 {tabs.find(t => t.id === tab)?.label}
@@ -139,9 +141,13 @@ export default function App() {
                   key={tabItem.id}
                   onClick={() => setTab(tabItem.id)}
                   className={`px-4 py-2 text-sm font-medium rounded-lg transition-all whitespace-nowrap ${
-                    tab === tabItem.id
-                      ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 shadow-sm shadow-cyan-500/10"
-                      : "text-slate-500 hover:text-white hover:bg-slate-800/60 border border-transparent"
+                    tabItem.id === "live"
+                      ? tab === tabItem.id
+                        ? "bg-red-500/20 text-red-400 border border-red-500/40 shadow-sm shadow-red-500/10"
+                        : "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20"
+                      : tab === tabItem.id
+                        ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 shadow-sm shadow-cyan-500/10"
+                        : "text-slate-500 hover:text-white hover:bg-slate-800/60 border border-transparent"
                   }`}
                 >
                   {tabItem.label}
@@ -157,7 +163,6 @@ export default function App() {
                 </span>
               )}
 
-              {/* Language toggle with simple flags (CDN based to fix Windows issue) */}
               <button
                 onClick={handleLangToggle}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-700 transition-all group"
@@ -196,9 +201,13 @@ export default function App() {
                     setIsMobileMenuOpen(false); // Close menu on click
                   }}
                   className={`px-4 py-3 text-left text-sm font-medium rounded-lg transition-all ${
-                    tab === tabItem.id
-                      ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/30"
-                      : "text-slate-400 hover:text-white hover:bg-slate-800/60 border border-transparent"
+                    tabItem.id === "live"
+                      ? tab === tabItem.id
+                        ? "bg-red-500/20 text-red-400 border border-red-500/40"
+                        : "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20"
+                      : tab === tabItem.id
+                        ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/30"
+                        : "text-slate-400 hover:text-white hover:bg-slate-800/60 border border-transparent"
                   }`}
                 >
                   {tabItem.label}
@@ -244,6 +253,7 @@ export default function App() {
         {tab === "withdrawals" && <div className="mb-8"><WithdrawalTracker /></div>}
         {tab === "youtube" && <div className="mb-8"><YouTubeFeed videos={youtube} /></div>}
         {tab === "news" && <div className="mb-8"><NewsFeed articles={news} /></div>}
+        {tab === "live" && <div className="mb-8"><LivePage /></div>}
 
         <footer className="text-center py-8 border-t border-slate-800">
           <p className="text-xs text-slate-600">{t("footer.data")}</p>

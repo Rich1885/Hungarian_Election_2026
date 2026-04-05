@@ -442,13 +442,20 @@ export default function WithdrawalTracker() {
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {data.mszpIndependents.map((ind, i) => (
-                  <div key={i} className="bg-slate-800/40 rounded-xl border border-slate-700/50 p-4 flex items-start gap-4 hover:border-slate-600/50 transition-colors shadow-sm">
-                    <div className="w-10 h-10 mt-1 rounded-full bg-gradient-to-br from-red-500/20 to-red-600/10 border border-red-500/30 flex items-center justify-center flex-shrink-0 shadow-inner">
-                      <span className="text-xs font-black text-red-400">{ind.candidate.split(" ").map(n => n[0]).join("")}</span>
+                  <div key={i} className={`rounded-xl border p-4 flex items-start gap-4 transition-colors shadow-sm ${ind.updated ? "bg-amber-500/5 border-amber-500/30 hover:border-amber-500/40" : "bg-slate-800/40 border-slate-700/50 hover:border-slate-600/50"}`}>
+                    <div className={`w-10 h-10 mt-1 rounded-full flex items-center justify-center flex-shrink-0 shadow-inner ${ind.updated ? "bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/30" : "bg-gradient-to-br from-red-500/20 to-red-600/10 border border-red-500/30"}`}>
+                      <span className={`text-xs font-black ${ind.updated ? "text-amber-400" : "text-red-400"}`}>{ind.candidate.split(" ").map(n => n[0]).join("")}</span>
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center justify-between gap-1 mb-1">
-                        <div className="text-sm font-bold text-white">{ind.candidate}</div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-bold text-white">{ind.candidate}</span>
+                          {ind.updated && (
+                            <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/25">
+                              {lang === "en" ? "Updated" : "Módosult"}
+                            </span>
+                          )}
+                        </div>
                         {ind.source_url && (
                           <a href={ind.source_url} target="_blank" rel="noopener noreferrer"
                             className="flex items-center gap-0.5 text-[9px] font-bold uppercase tracking-wider text-cyan-500/60 hover:text-cyan-400 transition-colors flex-shrink-0">

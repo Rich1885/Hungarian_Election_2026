@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-01",
+  "lastUpdated": "2026-04-05",
   "nationalWithdrawals": [
     {
       "party": "Momentum",
@@ -178,6 +178,76 @@
       "reason_en": "Stepped down to maximise chances for Tisza.",
       "source_name": "Telex",
       "source_url": "https://telex.hu/belfold/2026/03/24/ternyak-andras-dk-budapest-8-xix-kerulet-visszalepes"
+    },
+    {
+      "oevk_id": "VE-03",
+      "oevk_name_hu": "Veszprém 03",
+      "oevk_name_en": "Veszprém 03",
+      "candidate": "Sándor Balázs",
+      "party": "MKKP",
+      "date": "2026-04-02",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Az MKKP legfőbb célja az Orbán-rendszer leváltása. A Fidesz leváltása érdekében hozták a döntést. Ebben a körzetben indul Navracsics Tibor is.",
+      "reason_en": "MKKP's main goal is replacing the Orbán regime. Decision made to help defeat Fidesz. Navracsics Tibor also runs in this district.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/04/02/magyar-ketfarku-kutyapart-visszalepes-valasztas-2026-tisza"
+    },
+    {
+      "oevk_id": "PE-14",
+      "oevk_name_hu": "Pest 14",
+      "oevk_name_en": "Pest 14",
+      "candidate": "Gór-Nagy György",
+      "party": "MKKP",
+      "date": "2026-04-02",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Az MKKP a Fidesz leváltása érdekében döntött a visszalépésről. A körzetben DK-s, Mi Hazánk-os, Fidesz-es és Tisza jelölt indul.",
+      "reason_en": "MKKP decided to withdraw to help defeat Fidesz. DK, Mi Hazánk, Fidesz and Tisza candidates remain in the district.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/04/02/magyar-ketfarku-kutyapart-visszalepes-valasztas-2026-tisza"
+    },
+    {
+      "oevk_id": "NO-01",
+      "oevk_name_hu": "Nógrád 01 (Salgótarján)",
+      "oevk_name_en": "Nógrád 01 (Salgótarján)",
+      "candidate": "Czvanczig László",
+      "party": "MKKP",
+      "date": "2026-04-02",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Az MKKP visszaléptette jelöltjét. Ebből a körzetből a DK is visszaléptette a jelöltjét, és a független Berki Sándor is visszalépett március végén.",
+      "reason_en": "MKKP withdrew their candidate. DK also withdrew from this district, and independent Berki Sándor also stepped down in late March.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/04/02/magyar-ketfarku-kutyapart-visszalepes-valasztas-2026-tisza"
+    },
+    {
+      "oevk_id": "NO-01",
+      "oevk_name_hu": "Nógrád 01 (Salgótarján)",
+      "oevk_name_en": "Nógrád 01 (Salgótarján)",
+      "candidate": "Berki Sándor",
+      "party": "Fuggetlen",
+      "date": "2026-03-28",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": null,
+      "reason_hu": "Független jelöltként visszalépett a Tisza javára a kormányváltás érdekében.",
+      "reason_en": "Withdrew as independent candidate in favour of Tisza for government change.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/04/02/magyar-ketfarku-kutyapart-visszalepes-valasztas-2026-tisza"
+    },
+    {
+      "oevk_id": "FE-02",
+      "oevk_name_hu": "Fejér 02 (Dunaújváros)",
+      "oevk_name_en": "Fejér 02 (Dunaújváros)",
+      "candidate": "Szabó Zsolt",
+      "party": "DK",
+      "date": "2026-04-01",
+      "beneficiary": "Tisza",
+      "beneficiary_candidate": "Nagy Ervin",
+      "reason_hu": "Dunaújváros alpolgármestere visszalépett Nagy Ervin javára. Számára a politika szolgálat, és a kormányváltást úgy tudja legjobban szolgálni, hogy Nagy Ervint támogatja.",
+      "reason_en": "Dunaújváros deputy mayor stepped down in favour of Nagy Ervin. For him politics is service, and he can best serve the cause of government change by supporting Nagy Ervin.",
+      "source_name": "Telex",
+      "source_url": "https://telex.hu/belfold/2026/04/01/dunaujvaros-szabo-zsolt-alpolgarmester-visszalepes-nagy-ervin"
     }
   ],
   "notableNonWithdrawals": [
@@ -272,12 +342,12 @@
     },
     {
       "party": "MKKP",
-      "status": "running",
+      "status": "partial",
       "color": "#6b7280",
-      "summary_hu": "Indul, nem lép vissza. Saját protest-szerep, nem akar koordinációt. Helyenként spoilerhatás lehetséges.",
-      "summary_en": "Running, not withdrawing. Own protest role, no coordination. Possible spoiler effect in some districts.",
+      "summary_hu": "3 körzetben visszalépett a Tisza javára (Veszprém 03, Pest 14, Nógrád 01). A többi körzetben továbbra is indulnak.",
+      "summary_en": "Withdrew from 3 districts in favor of Tisza (Veszprém 03, Pest 14, Nógrád 01). Still running in all other districts.",
       "source_name": "Telex",
-      "source_url": "https://telex.hu/belfold/2026/01/27/mkkp-nagy-david-valasztas-indulas-jeloltek-lista"
+      "source_url": "https://telex.hu/belfold/2026/04/02/magyar-ketfarku-kutyapart-visszalepes-valasztas-2026-tisza"
     },
     {
       "party": "Jobbik",
@@ -295,10 +365,12 @@
       "oevk_name_hu": "Budapest 08",
       "oevk_name_en": "Budapest 08",
       "candidate": "Kunhalmi Ágnes",
-      "note_hu": "Volt MSZP társelnök, függetlenként indul",
-      "note_en": "Former MSZP co-chair, running as independent",
-      "source_name": "HVG",
-      "source_url": "https://hvg.hu/itthon/20260216_kunhalmi-agnes-mszp-egyeni-jelolt-kampany-orszaggyulesi-valasztas-2026-szinszlo-sandor-gajda-peter-partlogo"
+      "note_hu": "Volt MSZP társelnök — VISSZALÉPETT, mégsem indul függetlenként",
+      "note_en": "Former MSZP co-chair — WITHDREW, will not run as independent after all",
+      "updated": true,
+      "update_date": "2026-04-04",
+      "source_name": "Naphíre",
+      "source_url": "https://naphire.hu/cikk/kunhalmi-agnes-visszalepes-valasztas-2026-dontes"
     },
     {
       "oevk_id": "BP-14",
