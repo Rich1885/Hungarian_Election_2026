@@ -21,6 +21,15 @@ const SOURCE_HOVER_GLOW = {
   Index: "hover:shadow-[inset_4px_0_0_rgba(249,115,22,0.4)] hover:border-orange-500/20",
 };
 
+
+function openArticlePopup(url) {
+  const w = Math.min(1000, window.screen.width - 100);
+  const h = Math.min(800, window.screen.height - 100);
+  const left = Math.round((window.screen.width - w) / 2);
+  const top = Math.round((window.screen.height - h) / 2);
+  window.open(url, "_blank", `width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
+}
+
 export default function NewsFeed({ articles }) {
   if (!articles || articles.length === 0) return null;
 
@@ -109,12 +118,10 @@ export default function NewsFeed({ articles }) {
               
               <div className="space-y-3 sm:pl-10">
                 {sourceArticles.map((article, i) => (
-                  <a
+                  <div
                     key={i}
-                    href={article.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block group bg-slate-800/30 rounded-xl border border-slate-700/50 p-4 sm:p-5 transition-all duration-300 hover:bg-slate-800/60 ${hoverGlow}`}
+                    onClick={() => openArticlePopup(article.link)}
+                    className={`block group bg-slate-800/30 rounded-xl border border-slate-700/50 p-4 sm:p-5 transition-all duration-300 hover:bg-slate-800/60 cursor-pointer ${hoverGlow}`}
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
@@ -126,19 +133,18 @@ export default function NewsFeed({ articles }) {
                             {timeAgoI18n(article.pubDate)}
                           </span>
                         </div>
-                        
+
                         <h3 className="text-sm sm:text-base font-medium text-slate-200 group-hover:text-white transition-colors leading-snug">
                           {article.title}
                         </h3>
-                        
+
                         {article.description && (
                           <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                             {article.description}
                           </p>
                         )}
                       </div>
-                      
-                      {/* Külső link ikon a sarokban */}
+
                       <div className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 border border-slate-700 text-slate-500 group-hover:bg-slate-800 group-hover:text-slate-300 transition-colors flex-shrink-0">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -146,7 +152,7 @@ export default function NewsFeed({ articles }) {
                         </svg>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>

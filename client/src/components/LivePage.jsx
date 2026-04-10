@@ -49,7 +49,7 @@ export default function LivePage() {
         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/iwyu3mJ7hVc?autoplay=0&rel=0"
+            src="https://www.youtube.com/watch?v=t6BEQJTqnXY"
             title="Élő választási közvetítés"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

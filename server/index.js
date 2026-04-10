@@ -494,6 +494,69 @@ function safeParse(val) {
   return Array.isArray(val) ? val : [];
 }
 
+// ── Article proxy (strips X-Frame-Options so pages load in iframe) ──────────
+
+const ALLOWED_PROXY_HOSTS = ["telex.hu", "444.hu", "hvg.hu", "index.hu"];
+
+app.get("/api/proxy", async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.status(400).send("Missing url param");
+
+  let parsed;
+  try { parsed = new URL(url); } catch { return res.status(400).send("Invalid URL"); }
+
+  const allowed = ALLOWED_PROXY_HOSTS.some((h) => parsed.hostname.endsWith(h));
+  if (!allowed) return res.status(403).send("Host not allowed");
+
+  const client = parsed.protocol === "https:" ? https : http;
+  const options = {
+    hostname: parsed.hostname,
+    path: parsed.pathname + parsed.search,
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "hu-HU,hu;q=0.9,en;q=0.8",
+    },
+  };
+
+  const proxyReq = client.get(options, (proxyRes) => {
+    const headers = { ...proxyRes.headers };
+    delete headers["x-frame-options"];
+    delete headers["content-security-policy"];
+    delete headers["content-security-policy-report-only"];
+
+    // Handle redirects
+    if ((proxyRes.statusCode === 301 || proxyRes.statusCode === 302) && headers.location) {
+      const loc = headers.location.startsWith("http")
+        ? headers.location
+        : `${parsed.origin}${headers.location}`;
+      return res.redirect(`/api/proxy?url=${encodeURIComponent(loc)}`);
+    }
+
+    const contentType = headers["content-type"] || "";
+    if (contentType.includes("text/html")) {
+      // Inject <base> tag so relative URLs resolve against the original domain
+      delete headers["content-length"];
+      delete headers["transfer-encoding"];
+      res.writeHead(proxyRes.statusCode, { ...headers, "transfer-encoding": "chunked" });
+
+      let html = "";
+      proxyRes.on("data", (chunk) => (html += chunk));
+      proxyRes.on("end", () => {
+        const base = `<base href="${parsed.origin}/">`;
+        const injected = html.replace(/(<head[^>]*>)/i, `$1${base}`);
+        res.end(injected);
+      });
+    } else {
+      res.writeHead(proxyRes.statusCode, headers);
+      proxyRes.pipe(res);
+    }
+  });
+
+  proxyReq.on("error", () => res.status(502).send("Proxy error"));
+  proxyReq.setTimeout(15000, () => { proxyReq.destroy(); res.status(504).send("Timeout"); });
+});
+
 // ── Start ───────────────────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
