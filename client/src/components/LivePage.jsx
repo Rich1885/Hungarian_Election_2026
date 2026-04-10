@@ -8,18 +8,18 @@ export default function LivePage() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
           </span>
-          <span className="text-xs font-bold uppercase tracking-widest text-red-400">Hamarosan élőben</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-red-400">Élőben</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 leading-tight">
-          Kövesd a választást{" "}
+          Kövesd a rendszerbontó koncertet{" "}
           <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-            velünk élőben
+            élőben a Telexen
           </span>
         </h1>
 
         <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          Hamarosan itt indul az élő választási közvetítés és műsorfigyelő felület.
+          Kövesd élőben a 2026-os magyarországi országgyűlési választást.
         </p>
       </div>
 
@@ -49,26 +49,12 @@ export default function LivePage() {
         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/VIDEO_ID"
-            title="YouTube live stream"
+            src="https://www.youtube.com/embed/iwyu3mJ7hVc?autoplay=0&rel=0"
+            title="Élő választási közvetítés"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
-
-          {/* Hamarosan overlay */}
-          <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm flex flex-col items-center justify-center gap-4">
-            <div className="w-20 h-20 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-cyan-400 ml-1">
-                <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" opacity="0.3" />
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
-            </div>
-            <div className="text-center">
-              <p className="text-lg font-bold text-white mb-1">2026. április 12.</p>
-              <p className="text-sm text-slate-400">A közvetítés a választás napján indul</p>
-            </div>
-          </div>
         </div>
       </div>
 
