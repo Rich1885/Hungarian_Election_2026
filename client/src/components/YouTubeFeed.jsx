@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { t, timeAgoI18n } from "../utils/i18n";
 
 const CHANNEL_COLORS = {
@@ -15,15 +15,13 @@ function formatViews(views) {
   return views.toString();
 }
 
-function VideoCard({ video, isFeatured = false }) {
+function VideoCard({ video, isFeatured = false, onPlay }) {
   const colors = CHANNEL_COLORS[video.channel] || CHANNEL_COLORS["Telex"];
 
   return (
-    <a
-      href={video.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`block bg-slate-900/40 rounded-2xl border border-slate-700/50 overflow-hidden hover:border-slate-500/50 hover:bg-slate-800/60 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group ${isFeatured ? "md:col-span-2 md:row-span-2 flex flex-col h-full" : ""}`}
+    <div
+      onClick={() => onPlay(video.videoId)}
+      className={`block bg-slate-900/40 rounded-2xl border border-slate-700/50 overflow-hidden hover:border-slate-500/50 hover:bg-slate-800/60 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group cursor-pointer ${isFeatured ? "md:col-span-2 md:row-span-2 flex flex-col h-full" : ""}`}
     >
       {/* Thumbnail Container */}
       <div className={`relative bg-slate-800 overflow-hidden ${isFeatured ? "aspect-video md:aspect-auto md:flex-1" : "aspect-video"}`}>
@@ -72,12 +70,21 @@ function VideoCard({ video, isFeatured = false }) {
           )}
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 
 export default function YouTubeFeed({ videos }) {
   const [selectedChannel, setSelectedChannel] = useState(null);
+  const [playingId, setPlayingId] = useState(null);
+  const playerRef = useRef(null);
+
+  function playVideo(id) {
+    setPlayingId(id);
+    setTimeout(() => {
+      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  }
 
   if (!videos || videos.length === 0) {
     return (
@@ -153,12 +160,37 @@ export default function YouTubeFeed({ videos }) {
         </div>
       </div>
 
+      {/* Inline player */}
+      {playingId && (
+        <div ref={playerRef} className="rounded-2xl border border-cyan-500/20 bg-slate-900/80 overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.08)]">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-slate-800/80 bg-slate-950/50">
+            <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Lejátszás</span>
+            <button
+              onClick={() => setPlayingId(null)}
+              className="text-slate-500 hover:text-white transition-colors text-lg leading-none"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src={`https://www.youtube.com/embed/${playingId}?autoplay=1&rel=0`}
+              title="YouTube videó"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
+
       {/* Video grid with Featured element */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
         {filteredVideos.slice(0, 16).map((video, index) => {
           // A legelső videó mindig nagy (featured) kártya, ha nincs szűrés bekapcsolva
           const isFeatured = index === 0 && !selectedChannel;
-          return <VideoCard key={video.videoId} video={video} isFeatured={isFeatured} />;
+          return <VideoCard key={video.videoId} video={video} isFeatured={isFeatured} onPlay={playVideo} />;
         })}
       </div>
 
