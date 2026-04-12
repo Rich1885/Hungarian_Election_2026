@@ -253,7 +253,7 @@ export default function DistrictMap({ oevkDetails }) {
               <div className="text-[10px] text-slate-500 mb-1">{label}</div>
               <div className="flex gap-2 text-[11px]">
                 <span className="text-emerald-400 font-bold">{s.tisza}</span>
-                <span className="text-slate-600">—</span>
+                <span className="text-slate-600">-</span>
                 <span className="text-orange-400 font-bold">{s.fidesz}</span>
               </div>
               <div className="flex mt-1 rounded-full overflow-hidden h-1.5">
