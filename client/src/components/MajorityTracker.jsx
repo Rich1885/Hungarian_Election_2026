@@ -4,11 +4,12 @@ import { fetchHistory, fetchMajority } from "../api";
 const BLUE = "#3b82f6";
 const W = 800;
 const H = 140;
-const PAD_X = 4;
+const PAD_LEFT = 42; // space for Y labels
+const PAD_RIGHT = 8;
 const PAD_Y = 16;
 
 function PolyLine({ data }) {
-  const path = useMemo(() => {
+  const calc = useMemo(() => {
     if (!data || data.length < 2) return null;
     const prices = data.map((d) => d.p);
     const min = Math.min(...prices);
@@ -17,7 +18,8 @@ function PolyLine({ data }) {
     const pad = range * 0.15;
     const lo = min - pad;
     const hi = max + pad + pad;
-    const gx = (i) => PAD_X + (i / (data.length - 1)) * (W - PAD_X * 2);
+
+    const gx = (i) => PAD_LEFT + (i / (data.length - 1)) * (W - PAD_LEFT - PAD_RIGHT);
     const gy = (p) => H - PAD_Y - ((p - lo) / (hi - lo)) * (H - PAD_Y * 2);
 
     const pts = data.map((d, i) => [gx(i), gy(d.p)]);
@@ -25,27 +27,54 @@ function PolyLine({ data }) {
     const area = `${line} L${pts[pts.length - 1][0].toFixed(1)},${H} L${pts[0][0].toFixed(1)},${H} Z`;
     const last = pts[pts.length - 1];
 
-    return { line, area, last };
+    // Y-axis tick values — round to nice numbers
+    const step = range / 3;
+    const ticks = [min + step * 0.5, min + step * 1.5, min + step * 2.5].map((v) => ({
+      val: v,
+      y: gy(v),
+      label: `${(v * 100).toFixed(0)}%`,
+    }));
+
+    return { line, area, last, ticks, gy };
   }, [data]);
 
-  if (!path) return null;
+  if (!calc) return null;
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full" preserveAspectRatio="none">
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full">
       <defs>
         <linearGradient id="polyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={BLUE} stopOpacity="0.3" />
+          <stop offset="0%" stopColor={BLUE} stopOpacity="0.25" />
           <stop offset="100%" stopColor={BLUE} stopOpacity="0.01" />
         </linearGradient>
       </defs>
-      {[0.2, 0.5, 0.8].map((f) => (
-        <line key={f} x1={0} y1={H * f} x2={W} y2={H * f}
-          stroke="rgba(51,65,85,0.35)" strokeWidth="1" strokeDasharray="3 6" />
+
+      {/* Grid lines + Y labels */}
+      {calc.ticks.map((tick) => (
+        <g key={tick.label}>
+          <line x1={PAD_LEFT} y1={tick.y} x2={W - PAD_RIGHT} y2={tick.y}
+            stroke="rgba(51,65,85,0.4)" strokeWidth="1" strokeDasharray="3 6" />
+          <text x={PAD_LEFT - 6} y={tick.y + 4} textAnchor="end"
+            fontSize="11" fontFamily="monospace" fill="rgba(148,163,184,0.7)">
+            {tick.label}
+          </text>
+        </g>
       ))}
-      <path d={path.area} fill="url(#polyGrad)" />
-      <path d={path.line} fill="none" stroke={BLUE} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={path.last[0]} cy={path.last[1]} r="5" fill={BLUE} />
-      <circle cx={path.last[0]} cy={path.last[1]} r="10" fill={BLUE} fillOpacity="0.2" />
+
+      {/* Area + line */}
+      <path d={calc.area} fill="url(#polyGrad)" />
+      <path d={calc.line} fill="none" stroke={BLUE} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+
+      {/* Current price dot */}
+      <circle cx={calc.last[0]} cy={calc.last[1]} r="5" fill={BLUE} />
+      <circle cx={calc.last[0]} cy={calc.last[1]} r="10" fill={BLUE} fillOpacity="0.2" />
+
+      {/* Current price label on right */}
+      <rect x={calc.last[0] + 8} y={calc.last[1] - 10} width={36} height={20} rx={4} fill={BLUE} />
+      <text x={calc.last[0] + 26} y={calc.last[1] + 4} textAnchor="middle"
+        fontSize="11" fontWeight="bold" fontFamily="monospace" fill="white">
+        {`${(data[data.length - 1].p * 100).toFixed(0)}%`}
+      </text>
     </svg>
   );
 }

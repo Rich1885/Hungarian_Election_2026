@@ -4,7 +4,7 @@ const STREAMS = [
   {
     id: "partizan",
     label: "Partizán",
-    videoId: "_3m4wtII9ew",
+    videoId: "bQvLR768Ueo",
     color: "bg-blue-500/20 text-blue-400 border-blue-500/40",
     glow: "shadow-[0_0_40px_rgba(59,130,246,0.08)]",
     border: "border-blue-500/20",
