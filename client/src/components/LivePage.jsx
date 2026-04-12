@@ -12,9 +12,9 @@ export default function LivePage() {
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 leading-tight">
-          Kövesd a rendszerbontó koncertet{" "}
+          Kövesd a választást{" "}
           <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-            élőben a Szélsőközép közvetítésével
+            élőben
           </span>
         </h1>
 
@@ -49,7 +49,7 @@ export default function LivePage() {
         <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/watch?v=_3m4wtII9ew?autoplay=0&rel=0"
+            src="https://www.youtube.com/embed/ecJNoV9aSZk?autoplay=0&rel=0"
             title="Élő választási közvetítés"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
