@@ -79,7 +79,7 @@ export default function LivePage() {
 
   useEffect(() => {
     function fetchReszvetel() {
-      fetch("http://localhost:3001/api/reszvetel")
+      fetch("https://hungarian-election-2026-api.onrender.com/api/reszvetel")
         .then((r) => r.json())
         .then((d) => { if (!d.error) setReszvetel(d); })
         .catch(() => {});
