@@ -12,7 +12,7 @@ const STREAMS = [
   {
     id: "telex",
     label: "Telex",
-    videoId: "ecJNoV9aSZk",
+    videoId: "0FdaQ2q3Ljg",
     color: "bg-emerald-500/20 text-emerald-400 border-emerald-500/40",
     glow: "shadow-[0_0_40px_rgba(16,185,129,0.08)]",
     border: "border-emerald-500/20",
