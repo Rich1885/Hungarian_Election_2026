@@ -494,6 +494,39 @@ function safeParse(val) {
   return Array.isArray(val) ? val : [];
 }
 
+// ── Részvételi adatok (NVI vtr.valasztas.hu) ────────────────────────────────
+
+let reszvetelCache = { data: null, ts: 0 };
+
+const ATLATSZO_BASE = "https://valasztas2026.atlatszo.hu/data/val/nap";
+
+app.get("/api/reszvetel", async (req, res) => {
+  try {
+    const now = Date.now();
+    if (reszvetelCache.data && now - reszvetelCache.ts < 60000) {
+      return res.json(reszvetelCache.data);
+    }
+
+    const [meta, summary] = await Promise.all([
+      fetchJSON(`${ATLATSZO_BASE}/turnout_metadata.json`),
+      fetchJSON(`${ATLATSZO_BASE}/turnout_summary.json`),
+    ]);
+
+    const result = {
+      idopont: meta.latestTime || "--:--",
+      reszvetel: summary.nationalAvg || null,
+      legmagasabb: (summary.top3 || []).map(t => ({ nev: t.name, szazalek: t.count })),
+      legalacsonyabb: (summary.bottom3 || []).map(t => ({ nev: t.name, szazalek: t.count })),
+      lastFetched: new Date().toISOString(),
+    };
+
+    reszvetelCache = { data: result, ts: now };
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ── Article proxy (strips X-Frame-Options so pages load in iframe) ──────────
 
 const ALLOWED_PROXY_HOSTS = ["telex.hu", "444.hu", "hvg.hu", "index.hu"];
