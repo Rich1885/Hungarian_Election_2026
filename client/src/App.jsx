@@ -13,6 +13,7 @@ import MapPage from "./components/MapPage";
 import YouTubeFeed from "./components/YouTubeFeed";
 import WithdrawalTracker from "./components/WithdrawalTracker";
 import LivePage from "./components/LivePage";
+import MajorityTracker from "./components/MajorityTracker";
 import { t, setLanguage, getLanguage } from "./utils/i18n";
 
 export default function App() {
@@ -229,6 +230,7 @@ export default function App() {
         
         {tab === "markets" && (
           <>
+            <MajorityTracker />
             {topParties.length >= 2 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {topParties.map((m) => (

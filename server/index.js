@@ -494,6 +494,45 @@ function safeParse(val) {
   return Array.isArray(val) ? val : [];
 }
 
+// ── Constitutional majority market ──────────────────────────────────────────
+
+let majorityCache = { data: null, ts: 0 };
+
+app.get("/api/majority", async (req, res) => {
+  try {
+    const now = Date.now();
+    if (majorityCache.data && now - majorityCache.ts < 30000) {
+      return res.json(majorityCache.data);
+    }
+    const data = await fetchJSON(
+      "https://gamma-api.polymarket.com/events?slug=hungary-election-tisza-wins-a-constitutional-majority"
+    );
+    const event = Array.isArray(data) ? data[0] : data;
+    if (!event) return res.status(404).json({ error: "Market not found" });
+
+    const market = (event.markets || [])[0];
+    if (!market) return res.status(404).json({ error: "No market" });
+
+    const result = {
+      question: market.question || event.title,
+      conditionId: market.conditionId,
+      clobTokenIds: safeParse(market.clobTokenIds),
+      outcomePrices: safeParse(market.outcomePrices),
+      volume: parseFloat(market.volume) || 0,
+      volume24hr: parseFloat(market.volume24hr) || 0,
+      liquidity: parseFloat(market.liquidity) || 0,
+      oneDayPriceChange: parseFloat(market.oneDayPriceChange) || 0,
+      oneWeekPriceChange: parseFloat(market.oneWeekPriceChange) || 0,
+      lastTradePrice: parseFloat(market.lastTradePrice) || 0,
+    };
+
+    majorityCache = { data: result, ts: now };
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ── Részvételi adatok (NVI vtr.valasztas.hu) ────────────────────────────────
 
 let reszvetelCache = { data: null, ts: 0 };

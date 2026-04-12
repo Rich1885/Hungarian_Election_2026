@@ -1,4 +1,6 @@
-const BASE = "https://hungarian-election-2026-api.onrender.com/api";
+const BASE = import.meta.env.DEV
+  ? "/api"
+  : "https://hungarian-election-2026-api.onrender.com/api";
 
 export async function fetchEvent() {
   const res = await fetch(`${BASE}/event`);
@@ -45,5 +47,11 @@ export async function fetchYoutube() {
 export async function fetchWithdrawals() {
   const res = await fetch(`${BASE}/withdrawals`);
   if (!res.ok) throw new Error("Failed to fetch withdrawals");
+  return res.json();
+}
+
+export async function fetchMajority() {
+  const res = await fetch(`${BASE}/majority`);
+  if (!res.ok) throw new Error("Failed to fetch majority market");
   return res.json();
 }
